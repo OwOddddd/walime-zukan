@@ -1,0 +1,215 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>和萊姆圖鑑</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="review.css">
+<style>
+/* 版面：角色圖鑑。卡片與立繪在深淺色主題都維持紙色 */
+:root {
+  --bg: #eceef1;
+  --fg: #1e2329;
+  --muted: #5d6670;
+  --chip: #dfe3e8;
+  --paper: #fbfaf7;
+  --paper-edge: #e3e6ea;
+  --ink: #3a3440;
+  --display: "Huninn", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --text: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #16191d; --fg: #e4e7ea; --muted: #9aa3ad; --chip: #262b31; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #16191d; --fg: #e4e7ea; --muted: #9aa3ad; --chip: #262b31; color-scheme: dark; }
+body { background: var(--bg); color: var(--fg); font: 16px/1.7 var(--text); margin: 0; }
+.wrap { max-width: 1000px; margin: 0 auto; padding-block: 26px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+a { color: inherit; }
+
+/* 首頁 */
+.hero h1 { font: 2.2rem/1.2 var(--display); margin: 0 0 .25em; }
+.hero p { margin: 0 0 .4em; color: var(--muted); max-width: 62ch; }
+.jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 6px; }
+.jump a { font: .95rem/1 var(--display); padding: 8px 14px; border-radius: 999px; background: var(--chip); text-decoration: none; }
+.cat { margin-top: 34px; scroll-margin-top: 12px; }
+.cat > h2 { font: 1.6rem/1.3 var(--display); margin: 0; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.cat > h2 small { font: .9rem/1.4 var(--text); color: var(--muted); }
+.cat > p { margin: 4px 0 0; color: var(--muted); font-size: .95rem; max-width: 64ch; }
+.region { margin-top: 18px; }
+.region h3 { font: 1.05rem/1.3 var(--display); margin: 0 0 8px; color: var(--muted); display: flex; gap: 8px; align-items: baseline; }
+.region h3 span { font: .8rem/1 var(--text); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
+@media (max-width: 520px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } }
+.card { display: grid; justify-items: center; text-align: center; gap: 2px; padding: 12px 10px 14px; border-radius: 16px; background: var(--paper); border: 1px solid var(--paper-edge); text-decoration: none; color: var(--ink); transition: transform .15s, box-shadow .15s; }
+.card:hover, .card:focus-visible { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.08); outline: none; }
+.card svg { width: 100%; height: auto; display: block; }
+.card b { font: 1.15rem/1.3 var(--display); }
+.card small { font-size: .8rem; color: #6c6a74; }
+.todo { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.todo span { font-size: .82rem; padding: 2px 10px; border-radius: 999px; border: 1px dashed #b9bec6; color: var(--muted); }
+
+/* 詳細頁 */
+.nav { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 14px; }
+.back, .step { display: inline-block; font: .95rem/1 var(--display); text-decoration: none; padding: 8px 14px; border-radius: 999px; background: var(--chip); white-space: nowrap; }
+.step { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 420px) { .back, .step { padding: 8px 10px; font-size: .88rem; } }
+.detail { background: var(--paper); border: 1px solid var(--paper-edge); border-radius: 18px; padding: 20px; display: grid; gap: 18px; color: var(--ink); }
+.top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 20px; align-items: center; }
+.top > svg { width: 100%; max-width: 340px; height: auto; justify-self: center; }
+@media (max-width: 680px) { .top { grid-template-columns: 1fr; } }
+.title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; }
+.title h2 { font: 1.8rem/1.2 var(--display); margin: 0; }
+.tag { font: .8rem/1.5 var(--display); padding: 1px 10px; border-radius: 999px; color: #fff; }
+.motto { font: 1.02rem/1.5 var(--display); color: #6c6a74; margin: 4px 0 12px; }
+dl { margin: 0; display: grid; grid-template-columns: 5em 1fr; gap: 6px 12px; font-size: .96rem; }
+dt { font-family: var(--display); color: #8a8792; }
+dd { margin: 0; }
+.sw { display: inline-flex; align-items: center; gap: 5px; margin-right: 10px; white-space: nowrap; }
+.sw i { width: 16px; height: 16px; border-radius: 4px; border: 1px solid #c9ccd2; display: inline-block; }
+.faces { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.faces figure { margin: 0; display: grid; justify-items: center; text-align: center; background: #f2f1ed; border-radius: 12px; padding: 8px 6px; }
+.faces svg { width: 100%; max-width: 180px; height: auto; display: block; }
+.faces figcaption { font: .98rem/1.3 var(--display); }
+.faces small { display: block; font: .8rem/1.4 var(--text); color: #6c6a74; margin-top: 2px; }
+@media (max-width: 520px) { .faces { gap: 6px; } }
+.notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; font-size: .95rem; }
+@media (max-width: 680px) { .notes { grid-template-columns: 1fr; } }
+.notes h3 { font: 1rem/1.3 var(--display); margin: 0 0 4px; color: #6c6a74; }
+.notes ul { margin: 0; padding-left: 1.1em; }
+.why { font-size: .92rem; color: #55535c; background: #f2f1ed; border-radius: 10px; padding: 10px 12px; }
+.demo { font: 1rem/1 var(--display); text-decoration: none; padding: 10px 16px; border-radius: 999px; background: var(--ink); color: #fff; justify-self: start; }
+
+.bob { animation: bob 2.6s ease-in-out infinite alternate; }
+.float { animation: float 3.4s ease-in-out infinite alternate; }
+@keyframes bob { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+@keyframes float { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+.blink { transform-box: fill-box; transform-origin: center; animation: blink 4s infinite; }
+@keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+.spin { transform-box: fill-box; transform-origin: center; animation: spin 1.4s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.swing { transform-box: fill-box; transform-origin: 50% 0%; animation: swing 1.8s ease-in-out infinite alternate; }
+@keyframes swing { from { transform: rotate(-8deg); } to { transform: rotate(8deg); } }
+.wave-l { transform-box: fill-box; transform-origin: 100% 100%; animation: wave 1.2s ease-in-out infinite alternate; }
+.wave-r { transform-box: fill-box; transform-origin: 0% 100%; animation: wave 1.2s ease-in-out infinite alternate-reverse; }
+@keyframes wave { from { transform: rotate(-10deg); } to { transform: rotate(12deg); } }
+.shake { transform-box: fill-box; transform-origin: 50% 100%; animation: shake .25s linear infinite alternate; }
+@keyframes shake { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+.nod { transform-box: fill-box; transform-origin: 100% 40%; animation: nod 1.6s ease-in-out infinite alternate; }
+@keyframes nod { from { transform: rotate(-6deg); } to { transform: rotate(10deg); } }
+.sway { transform-box: fill-box; transform-origin: 50% 100%; animation: sway .9s ease-in-out infinite alternate; }
+@keyframes sway { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
+@media (prefers-reduced-motion: reduce) { .bob, .float, .blink, .spin, .swing, .wave-l, .wave-r, .shake, .nod, .sway { animation: none; } .card { transition: none; } }
+footer { margin-top: 40px; color: var(--muted); font-size: .88rem; }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <pattern id="mame" width="11" height="11" patternUnits="userSpaceOnUse"><circle cx="2.75" cy="2.75" r="2.1" fill="#eef2f7"/><circle cx="8.25" cy="8.25" r="2.1" fill="#eef2f7"/></pattern>
+</defs></svg>
+
+<div class="wrap" id="app"></div>
+
+<script src="walime.js"></script>
+<script>
+const app = document.getElementById('app');
+const byId = id => CHARS.find(c => c.id === id);
+const preview = c => `<svg viewBox="0 -4 200 214" role="img" aria-label="${c.name}">${c.look({})}</svg>`;
+const card = c => `<a class="card" href="#c/${c.id}">${preview(c)}<b>${c.name}</b><small>${c.kind.split('・').slice(1).join('・')}</small></a>`;
+
+// 同一分類內的排列順序，首頁格子與詳細頁的上一個／下一個共用
+function inCat(cat) {
+  const list = CHARS.filter(c => c.cat === cat);
+  if (cat !== 'pref') return list;
+  const order = REGIONS.flatMap(([, l]) => l);
+  return list.sort((a, b) => order.indexOf(PREF_OF[a.id]) - order.indexOf(PREF_OF[b.id]));
+}
+
+function home() {
+  document.title = '和萊姆圖鑑';
+  const prefs = CHARS.filter(c => c.cat === 'pref');
+  const doneNames = Object.values(PREF_OF);
+  // 已設計的依地方順序排成一整片格子；尚未設計的收在下方，依地方列出
+  const prefSorted = inCat('pref');
+  const todoList = REGIONS.map(([name, list]) => {
+    const todo = list.filter(n => !doneNames.includes(n));
+    return todo.length ? `<div class="region"><h3>${name}<span>還有 ${todo.length} 個</span></h3><div class="todo">${todo.map(n => `<span>${n}</span>`).join('')}</div></div>` : '';
+  }).join('');
+  const regions = `<div class="region"><div class="grid">${prefSorted.map(card).join('')}</div></div>
+    <details style="margin-top:16px"><summary style="cursor:pointer;color:var(--muted)">尚未設計的 ${47 - prefs.length} 個</summary>${todoList}</details>`;
+  const ryo = CHARS.filter(c => c.cat === 'ryo');
+  const kido = CHARS.filter(c => c.cat === 'kido');
+  const kidoTodo = KIDO.filter(n => !Object.values(KIDO_OF).includes(n));
+  const miyako = CHARS.filter(c => c.cat === 'miyako');
+  const guide = CHARS.filter(c => c.cat === 'guide');
+  app.innerHTML = `
+    <div class="hero">
+      <h1>和萊姆圖鑑</h1>
+      <p>日本各地的地方精神，以史萊姆的樣子出現。點進每一隻可以看到配件、表情、性格與設計說明。</p>
+      <div class="jump"><a href="#cat-pref">都道府縣</a><a href="#cat-ryo">律令國</a><a href="#cat-kido">五畿七道</a><a href="#cat-miyako">都城</a><a href="#cat-guide">讀者代理人</a></div>
+    </div>
+    <section class="cat" id="cat-pref"><h2>都道府縣<small>已設計 ${prefs.length} / 47</small></h2>
+      <p>現代的 47 個都道府縣，由北到南排列。</p>${regions}</section>
+    <section class="cat" id="cat-ryo"><h2>律令國<small>已設計 ${ryo.length}</small></h2>
+      <p>古代的令制國，以所屬現代縣的「歷史殘響」人格登場。</p>
+      <div class="region"><div class="grid">${ryo.map(card).join('')}</div></div></section>
+    <section class="cat" id="cat-kido"><h2>五畿七道<small>已設計 ${kido.length} / ${KIDO.length}</small></h2>
+      <p>跨越多個令制國的大區域，依「道」的性質設計。北海道在 1869 年加入，形成「五畿八道」。</p>
+      <div class="region"><div class="grid">${kido.map(card).join('')}</div>
+      <div class="todo">${kidoTodo.map(n => `<span>${n}</span>`).join('')}</div></div></section>
+    <section class="cat" id="cat-miyako"><h2>都城<small>已設計 ${miyako.length}</small></h2>
+      <p>時代名稱就是政權所在地。每座都城是所在縣的「歷史殘響」，依遷都的先後排列。</p>
+      <div class="region"><div class="grid">${miyako.map(card).join('')}</div></div></section>
+    <section class="cat" id="cat-guide"><h2>讀者代理人</h2>
+      <p>不是地方精神，是從台灣來的訪客，替讀者發問。</p>
+      <div class="region"><div class="grid">${guide.map(card).join('')}</div></div></section>
+    <footer>角色會輕微浮動、眨眼，頭上的配件會搖晃。手機若開了「減少動態效果」就會靜止。</footer>`;
+}
+
+function detail(c) {
+  document.title = c.name + '｜和萊姆圖鑑';
+  const list = inCat(c.cat), i = list.indexOf(c);
+  const prev = list[(i - 1 + list.length) % list.length], next = list[(i + 1) % list.length];
+  app.innerHTML = `
+    <nav class="nav">
+      <a class="step" href="#c/${prev.id}" aria-label="上一個：${prev.name}">‹ ${prev.name}</a>
+      <a class="back" href="#">回到圖鑑</a>
+      <a class="step" href="#c/${next.id}" aria-label="下一個：${next.name}">${next.name} ›</a>
+    </nav>
+    <article class="detail">
+      <div class="top">
+        <svg viewBox="0 -4 200 214" role="img" aria-label="${c.name}立繪">${c.look({})}</svg>
+        <div>
+          <div class="title"><h2>${c.name}</h2><span class="tag" style="background:${c.tagColor}">${c.kind}</span></div>
+          <div class="motto">${c.motto}</div>
+          <dl>
+            <dt>代表色</dt><dd>${c.colors.map(([n, h]) => `<span class="sw"><i style="background:${h}"></i>${n} ${h}</span>`).join('')}</dd>
+            ${c.scale ? `<dt>體型</dt><dd>標準素體的 ${c.scale} 倍</dd>` : ''}
+            ${c.acc.map(([n, t], i) => `<dt>${i ? '' : '配件'}</dt><dd><b>${n}</b>：${t}</dd>`).join('')}
+            <dt>核心性格</dt><dd>${c.persona}</dd>
+            <dt>差異化</dt><dd>${c.diff}</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="faces">${c.faces.map(f => `<figure><svg viewBox="0 -4 200 214" role="img" aria-label="${c.name}${f.name}">${c.look(f)}</svg><figcaption>${f.name}<small>${f.k}${f.q ? '　' + f.q : ''}</small></figcaption></figure>`).join('')}</div>
+      <div class="notes">
+        <div><h3>記憶點</h3><ul>${c.points.map(p => `<li>${p}</li>`).join('')}</ul></div>
+        <div><h3>能力</h3><p style="margin:0">${c.power}</p></div>
+      </div>
+      ${c.demo ? `<a class="demo" href="${c.demo}">看變形動畫</a>` : ''}
+      <div class="why"><b>設計說明：</b>${c.why}</div>
+    </article>`;
+  window.scrollTo(0, 0);
+}
+
+function route() {
+  const m = location.hash.match(/^#c\/(.+)$/);
+  const c = m && byId(m[1]);
+  if (c) detail(c); else {
+    home();
+    if (location.hash.startsWith('#cat-')) document.querySelector(location.hash)?.scrollIntoView();
+  }
+}
+addEventListener('hashchange', route);
+route();
+</script>
+<script src="review.js"></script>

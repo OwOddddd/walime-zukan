@@ -1,0 +1,408 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>北海道君試做</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+/* 版面：角色設定稿。紙與舞台在深淺色主題都維持原色 */
+:root {
+  --bg: #e9ebee;
+  --fg: #1e2329;
+  --muted: #5d6670;
+  --chip: #dfe3e8;
+  --paper: #fbfaf7;
+  --paper-edge: #e3e6ea;
+  --ink: #3a3440;
+  --snow: #F8FBFD;
+  --ice: #A8D8F0;
+  --crab: #c9573f;
+  --crab-dark: #9e3f2c;
+  --wool: #f3e3c3;
+  --star: #d8463c;
+  --display: "Huninn", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --text: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #16191d; --fg: #e4e7ea; --muted: #9aa3ad; --chip: #262b31; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #16191d; --fg: #e4e7ea; --muted: #9aa3ad; --chip: #262b31; color-scheme: dark; }
+
+body { background: var(--bg); color: var(--fg); font: 16px/1.7 var(--text); margin: 0; }
+.wrap { max-width: 920px; margin: 0 auto; padding-block: 28px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 34px; }
+header h1 { font: 2rem/1.25 var(--display); margin: 0 0 .3em; }
+header p { margin: 0; color: var(--muted); max-width: 62ch; }
+section { display: grid; gap: 10px; }
+h2 { font: 1.4rem/1.3 var(--display); margin: 0; }
+.desc { margin: 0; color: var(--muted); max-width: 64ch; }
+.sheet { background: var(--paper); border: 1px solid var(--paper-edge); border-radius: 14px; padding: 16px; }
+figure { margin: 0; display: grid; justify-items: center; text-align: center; }
+figure svg { width: 100%; height: auto; display: block; }
+figcaption { font: 1rem/1.35 var(--display); color: var(--ink); }
+figcaption small { display: block; font: .82rem/1.45 var(--text); color: #6c6a74; }
+
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 20px; align-items: center; }
+.hero svg { max-width: 360px; justify-self: center; width: 100%; }
+dl { margin: 0; display: grid; grid-template-columns: 5.5em 1fr; gap: 8px 12px; color: var(--ink); }
+dt { font-family: var(--display); color: #6c6a74; }
+dd { margin: 0; }
+.sw { display: inline-flex; align-items: center; gap: 6px; margin-right: 12px; white-space: nowrap; }
+.sw i { width: 18px; height: 18px; border-radius: 5px; border: 1px solid #c9ccd2; display: inline-block; }
+@media (max-width: 640px) { .hero { grid-template-columns: 1fr; } }
+
+.grid { display: grid; gap: 12px 14px; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); }
+@media (max-width: 640px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .grid.one { grid-template-columns: 1fr; } }
+.acc { display: grid; grid-template-columns: 120px 1fr; gap: 14px; align-items: center; color: var(--ink); }
+.acc h3 { font: 1.1rem/1.3 var(--display); margin: 0 0 4px; }
+.acc p { margin: 0; font-size: .95rem; color: #55535c; }
+.quote { font: .9rem/1.4 var(--display); color: #6c6a74; }
+
+.stage-wrap { display: grid; gap: 10px; }
+#demo { width: 100%; height: auto; display: block; border-radius: 12px; background: #e8f3f9; }
+.ctrl { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.ctrl button { font: 1rem/1 var(--display); border: 0; border-radius: 999px; padding: 10px 18px; background: var(--ink); color: #fff; cursor: pointer; }
+#cap { font: 1.08rem/1.5 var(--display); color: var(--ink); min-height: 1.6em; }
+
+/* 角色動作 */
+.bob { animation: bob 2.6s ease-in-out infinite alternate; }
+@keyframes bob { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+.blink { transform-box: fill-box; transform-origin: center; animation: blink 4s infinite; }
+@keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+.wave-l { transform-box: fill-box; transform-origin: 100% 100%; animation: wave 1.2s ease-in-out infinite alternate; }
+.wave-r { transform-box: fill-box; transform-origin: 0% 100%; animation: wave 1.2s ease-in-out infinite alternate-reverse; }
+@keyframes wave { from { transform: rotate(-10deg); } to { transform: rotate(12deg); } }
+.shake { transform-box: fill-box; transform-origin: 50% 100%; animation: shake .25s linear infinite alternate; }
+@keyframes shake { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+
+@keyframes bounce { 0% { transform: translateX(0); opacity: 1; } 70% { transform: translateX(-40px); opacity: 1; } 100% { transform: translateX(-10px) translateY(-20px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .bob, .blink, .wave-l, .wave-r, .shake, #demo .wind path { animation: none; } #demo * { transition: none !important; } }
+footer { color: var(--muted); font-size: .88rem; }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g-body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F8FBFD"/><stop offset=".55" stop-color="#F3F9FC"/><stop offset="1" stop-color="#A8D8F0"/>
+    </linearGradient>
+    <linearGradient id="g-wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F8FBFD"/><stop offset="1" stop-color="#cfe8f5"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <a href="index.html#c/hokkaido" style="color:var(--muted);font-size:.9rem">← 回到北海道君</a>
+  <header>
+    <h1>北海道君（和萊姆試做）</h1>
+    <p>依照原本的定調案重新整理：素體改成可以直接放進程式動畫的史萊姆，常態配件從「頭盔＋圍巾」改成「頭上的毛蟹＋北辰星圍巾」。最後一段是「變成雪牆擋颱風」的變形示範。</p>
+  </header>
+
+  <section>
+    <h2>常態立繪</h2>
+    <div class="sheet hero">
+      <svg viewBox="0 0 200 210" id="hero" role="img" aria-label="北海道君常態立繪"></svg>
+      <dl>
+        <dt>代表色</dt><dd><span class="sw"><i style="background:#F8FBFD"></i>雪白 #F8FBFD</span><span class="sw"><i style="background:#A8D8F0"></i>流冰藍 #A8D8F0</span></dd>
+        <dt>素體</dt><dd>蛋形史萊姆，上半雪白、下半漸層成流冰藍，像半透明的冰。體型是標準素體的 1.25 倍。</dd>
+        <dt>常態配件</dt><dd>頭上的毛蟹、北辰星圍巾</dd>
+        <dt>核心性格</dt><dd>開拓者。直爽、樂天、不拘小節，習慣用「物理」的方式解決問題。</dd>
+        <dt>語尾</dt><dd>「……這就是我的方式，道。」</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section>
+    <h2>配件與知識點</h2>
+    <div class="sheet grid one" style="--cols:2">
+      <div class="acc"><svg viewBox="40 0 120 90" id="acc-crab" aria-label="毛蟹"></svg>
+        <div><h3>毛蟹</h3><p>北海道代表性的海產。牠是活的，會跟著北海道君的情緒動：開心時揮鉗、生氣時舉起雙鉗發抖、嚴肅時安靜趴著。原本的毛蟹頭盔改成整隻螃蟹坐在頭上。</p></div></div>
+      <div class="acc"><svg viewBox="100 110 80 70" id="acc-star" aria-label="北辰星圍巾"></svg>
+        <div><h3>北辰星圍巾</h3><p>圍巾上的紅色五角星是明治時代「開拓使」的徽章「北辰」，現在札幌市時計台、北海道廳舊本廳舍上都看得到，札幌啤酒的紅星也是從這裡來的。剛好對應他「開拓者」的性格。</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>表情</h2>
+    <p class="desc">表情沿用顏文字風格，毛蟹負責放大情緒。最後一格是嚴肅主題時的沉穩模式：不用搞笑顏文字，毛蟹也安靜下來。</p>
+    <div class="sheet grid" id="faces" style="--cols:3"></div>
+  </section>
+
+  <section>
+    <h2>體型比例</h2>
+    <p class="desc">「巨大尺度」直接畫在體型上：同一張畫面裡，北海道君比其他縣大一圈，不用台詞也看得出來。左邊的灰色輪廓是一般縣的標準素體。</p>
+    <div class="sheet"><svg viewBox="0 0 420 232" id="scale" role="img" aria-label="體型比較"></svg></div>
+  </section>
+
+  <section>
+    <h2>變形示範：雪牆</h2>
+    <p class="desc">變形時先液化成一灘史萊姆，再重組成雪牆。毛蟹不會變形，會跳開、再坐到雪牆上，觀眾靠牠認出這面牆就是北海道君。</p>
+    <div class="sheet stage-wrap">
+      <svg id="demo" viewBox="0 0 800 340" role="img" aria-label="變形示範"></svg>
+      <div id="cap">按「播放」看變形。</div>
+      <div class="ctrl"><button id="play">播放</button></div>
+    </div>
+  </section>
+
+  <footer>人物會輕微浮動、偶爾眨眼。手機若開了「減少動態效果」就會靜止。</footer>
+</div>
+
+<script>
+const S = 'fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"';
+// 臉以 (100,104) 為中心
+const FACE = {
+  base:    `<g class="blink"><circle cx="85" cy="102" r="4.6" fill="var(--ink)"/><circle cx="115" cy="102" r="4.6" fill="var(--ink)"/></g><path d="M93,112 q3.5,5 7,0 q3.5,5 7,0" ${S}/>`,
+  proud:   `<path d="M78,103 q7,-9 14,0 M108,103 q7,-9 14,0" ${S}/><path d="M93,112 q3.5,5 7,0 q3.5,5 7,0" ${S}/>`,
+  serious: `<path d="M75,90 l14,6 M125,90 l-14,6" ${S}/><g class="blink"><circle cx="85" cy="103" r="4.3" fill="var(--ink)"/><circle cx="115" cy="103" r="4.3" fill="var(--ink)"/></g><path d="M93,113 q3.5,5 7,0 q3.5,5 7,0" ${S}/>`,
+  shock:   `<circle cx="85" cy="101" r="5.5" ${S} stroke-width="3"/><circle cx="115" cy="101" r="5.5" ${S} stroke-width="3"/><path d="M92,110 h16 l2,10 h-20 Z" fill="var(--ink)" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"/>`,
+  puzzled: `<g class="blink"><circle cx="85" cy="102" r="4.6" fill="var(--ink)"/><circle cx="115" cy="102" r="4.6" fill="var(--ink)"/></g><path d="M95,114 h10" ${S}/>`,
+  calm:    `<path d="M80,103 h10 M110,103 h10" ${S}/><path d="M96,114 h8" ${S}/>`,
+};
+
+// 毛蟹：mood = calm / wave / angry / still；以頭頂 (100,46) 為基準
+function crab(mood = 'calm') {
+  const clawL = `<g class="${mood === 'wave' ? 'wave-l' : ''}"><path d="M80,40 C70,34 66,24 70,16" ${S} stroke-width="3"/><path d="M70,18 C62,14 60,6 66,2 C70,8 76,8 78,4 C82,10 78,18 70,18 Z" fill="var(--crab)" stroke="var(--ink)" stroke-width="3" stroke-linejoin="round"/></g>`;
+  const clawR = `<g class="${mood === 'wave' ? 'wave-r' : ''}"><path d="M120,40 C130,34 134,24 130,16" ${S} stroke-width="3"/><path d="M130,18 C138,14 140,6 134,2 C130,8 124,8 122,4 C118,10 122,18 130,18 Z" fill="var(--crab)" stroke="var(--ink)" stroke-width="3" stroke-linejoin="round"/></g>`;
+  const clawsDown = `<path d="M80,44 C70,44 64,40 62,34" ${S} stroke-width="3"/><circle cx="61" cy="32" r="6" fill="var(--crab)" stroke="var(--ink)" stroke-width="3"/><path d="M120,44 C130,44 136,40 138,34" ${S} stroke-width="3"/><circle cx="139" cy="32" r="6" fill="var(--crab)" stroke="var(--ink)" stroke-width="3"/>`;
+  const claws = mood === 'still' ? '' : mood === 'calm' ? clawsDown : clawL + clawR;
+  const legs = `<path d="M80,48 l-12,6 M80,52 l-11,9 M120,48 l12,6 M120,52 l11,9" ${S} stroke-width="3"/>`;
+  const shell = `<ellipse cx="100" cy="46" rx="22" ry="13" fill="var(--crab)" stroke="var(--ink)" stroke-width="3.5"/>
+    <g stroke="var(--crab-dark)" stroke-width="2" stroke-linecap="round"><path d="M88,42 l-2,-3 M96,38 l-1,-3 M104,38 l1,-3 M112,42 l2,-3 M92,48 l-2,-2 M108,48 l2,-2 M100,44 v-3"/></g>
+    <path d="M93,34 v-6 M107,34 v-6" ${S} stroke-width="2.5"/><circle cx="93" cy="27" r="3" fill="var(--ink)"/><circle cx="107" cy="27" r="3" fill="var(--ink)"/>`;
+  const vein = mood === 'angry' ? '<path d="M126,22 q4,3 0,6 M136,22 q-4,3 0,6 M128,19 q3,4 6,0 M128,31 q3,-4 6,0" fill="none" stroke="#d9503f" stroke-width="2.5" stroke-linecap="round"/>' : '';
+  return `<g class="${mood === 'angry' ? 'shake' : ''}">${legs}${claws}${shell}${vein}</g>`;
+}
+
+const BODY = 'M100,44 C142,44 166,84 166,122 C166,158 138,178 100,178 C62,178 34,158 34,122 C34,84 58,44 100,44 Z';
+function body() {
+  return `
+    <ellipse cx="100" cy="194" rx="62" ry="7" fill="#000" opacity=".08"/>
+    <ellipse cx="78" cy="184" rx="15" ry="9" fill="var(--ice)" stroke="var(--ink)" stroke-width="3.5"/>
+    <ellipse cx="122" cy="184" rx="15" ry="9" fill="var(--ice)" stroke="var(--ink)" stroke-width="3.5"/>
+    <ellipse cx="36" cy="132" rx="9" ry="14" transform="rotate(30 36 132)" fill="#e3f1f8" stroke="var(--ink)" stroke-width="3.5"/>
+    <ellipse cx="164" cy="132" rx="9" ry="14" transform="rotate(-30 164 132)" fill="#e3f1f8" stroke="var(--ink)" stroke-width="3.5"/>
+    <path d="${BODY}" fill="url(#g-body)" stroke="var(--ink)" stroke-width="4.5"/>
+    <ellipse cx="66" cy="78" rx="13" ry="7" transform="rotate(-35 66 78)" fill="#fff"/>
+    <circle cx="58" cy="94" r="3.5" fill="#fff"/>
+    <g fill="#fff" opacity=".7"><circle cx="128" cy="164" r="3"/><circle cx="138" cy="154" r="2"/><circle cx="70" cy="166" r="2"/></g>`;
+}
+// 圍巾的兩端沿著身體曲線包過去：先算出身體在每個高度的左右邊界
+const EDGE = (() => {
+  const seg = [[100, 44], [142, 44], [166, 84], [166, 122], [166, 158], [138, 178], [100, 178]];
+  const pts = [];
+  for (let s = 0; s < 2; s++) { const [p0, p1, p2, p3] = seg.slice(s * 3, s * 3 + 4);
+    for (let i = 0; i <= 60; i++) { const t = i / 60, u = 1 - t;
+      pts.push([u*u*u*p0[0] + 3*u*u*t*p1[0] + 3*u*t*t*p2[0] + t*t*t*p3[0], u*u*u*p0[1] + 3*u*u*t*p1[1] + 3*u*t*t*p2[1] + t*t*t*p3[1]]); } }
+  return y => pts.reduce((best, p) => Math.abs(p[1] - y) < Math.abs(best[1] - y) ? p : best)[0];
+})();
+function scarf() {
+  const top = 117, bot = 137, off = 2.5, R = y => EDGE(y) + off, L = y => 200 - EDGE(y) - off;
+  const ys = Array.from({ length: 6 }, (_, i) => top + (bot - top) * i / 5);
+  const right = ys.map(y => `L${R(y).toFixed(1)},${y.toFixed(1)}`).join(' ');
+  const left = ys.slice().reverse().map(y => `L${L(y).toFixed(1)},${y.toFixed(1)}`).join(' ');
+  const band = `M${L(top).toFixed(1)},${top} Q100,${top + 22} ${R(top).toFixed(1)},${top} ${right} Q100,${bot + 22} ${L(bot).toFixed(1)},${bot} ${left} Z`;
+  const mid = (top + bot) / 2;
+  return `
+  <path d="M134,132 l5,36 l16,-2 l-7,-35 Z" fill="var(--wool)" stroke="var(--ink)" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M140,168 l1,6 M145,167 l1,6 M150,167 l1,6" ${S} stroke-width="2.5"/>
+  <path d="${band}" fill="var(--wool)" stroke="var(--ink)" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M${(L(mid) + 6).toFixed(1)},${mid} Q100,${mid + 22} ${(R(mid) - 6).toFixed(1)},${mid}" fill="none" stroke="#e2cfa8" stroke-width="2.5"/>`;
+}
+const SCARF = scarf();
+const STAR = (cx, cy, r) => { const pts = Array.from({ length: 10 }, (_, i) => { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * .45 : r; return `${(cx + rr * Math.cos(a)).toFixed(1)},${(cy + rr * Math.sin(a)).toFixed(1)}`; }).join(' '); return `<polygon points="${pts}" fill="var(--star)" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>`; };
+
+function hokkaido({ face = 'base', mood = 'calm', extra = '' } = {}) {
+  return `<g class="bob">${body()}<g transform="translate(0 0)">${FACE[face]}</g>${SCARF}${STAR(124, 137, 9)}${crab(mood)}${extra}</g>`;
+}
+
+document.getElementById('hero').innerHTML = hokkaido({ mood: 'wave' });
+document.getElementById('acc-crab').innerHTML = `<g transform="translate(0 22)">${crab('wave')}</g>`;
+document.getElementById('acc-star').innerHTML = SCARF + STAR(124, 137, 12);
+
+const FACES = [
+  { face: 'base', mood: 'calm', name: '常態', k: '(・ω・)', q: '' },
+  { face: 'proud', mood: 'wave', name: '得意', k: '(＾ω＾)', q: '「這就是我的方式，道。」' },
+  { face: 'puzzled', mood: 'calm', name: 'G 障礙', k: '(・_・)?', q: '「那是新的食物嗎？道。」', extra: '<g><circle cx="168" cy="40" r="14" fill="#fff" stroke="var(--ink)" stroke-width="3"/><text x="168" y="47" text-anchor="middle" font-family="Huninn, sans-serif" font-size="20" fill="var(--ink)">?</text></g>' },
+  { face: 'serious', mood: 'angry', name: '生氣', k: '(｀・ω・´)', q: '毛蟹舉鉗發抖' },
+  { face: 'shock', mood: 'wave', name: '震驚', k: '( ﾟдﾟ)', q: '「新宿到澀谷……在隔壁啊？」' },
+  { face: 'calm', mood: 'still', name: '沉穩模式', k: '( ・_・)', q: '嚴肅主題專用' },
+];
+document.getElementById('faces').innerHTML = FACES.map(f => `
+  <figure><svg viewBox="0 -6 200 214" role="img" aria-label="北海道君${f.name}">${hokkaido(f)}</svg>
+  <figcaption>${f.name}<small>${f.k}${f.q ? '　' + f.q : ''}</small></figcaption></figure>`).join('');
+
+document.getElementById('scale').innerHTML = `
+  <line x1="0" y1="204" x2="420" y2="204" stroke="#d9dde2" stroke-width="2"/>
+  <g transform="translate(40 50) scale(.8)" opacity=".55"><path d="${BODY}" fill="#e6e8ec" stroke="#8d929b" stroke-width="4" stroke-dasharray="7 6"/>
+    <ellipse cx="78" cy="184" rx="15" ry="9" fill="#e6e8ec" stroke="#8d929b" stroke-width="4"/><ellipse cx="122" cy="184" rx="15" ry="9" fill="#e6e8ec" stroke="#8d929b" stroke-width="4"/></g>
+  <text x="120" y="226" text-anchor="middle" font-family="Huninn, sans-serif" font-size="14" fill="#6c6a74">標準素體</text>
+  <g transform="translate(200 11) scale(1)">${hokkaido({ mood: 'calm' })}</g>
+  <text x="300" y="226" text-anchor="middle" font-family="Huninn, sans-serif" font-size="14" fill="#6c6a74">北海道君 ×1.25</text>`;
+
+// ===== 變形示範：路徑變形＋黏液濾鏡 =====
+// 每個形狀都取樣成 N 個點、從底部中央起算、方向一致，點對點插值後再用平滑曲線連起來
+const NS = 'http://www.w3.org/2000/svg';
+const demo = document.getElementById('demo');
+const N = 96;
+const OX = 200, OY = 82; // 角色在舞台上的位移
+const SHAPES = {
+  egg:    'M300,260 C262,260 234,240 234,204 C234,166 258,126 300,126 C342,126 366,166 366,204 C366,240 338,260 300,260 Z',
+  squash: 'M300,262 C250,262 222,246 222,214 C222,180 254,148 300,148 C346,148 378,180 378,214 C378,246 350,262 300,262 Z',
+  stretch:'M300,260 C268,260 244,238 244,198 C244,154 266,112 300,112 C334,112 356,154 356,198 C356,238 332,260 300,260 Z',
+  mound:  'M300,268 C238,268 208,264 210,250 C214,230 256,216 300,214 C344,216 386,230 390,250 C392,264 362,268 300,268 Z',
+  pool:   'M300,276 C214,276 186,272 186,265 C186,256 236,252 300,252 C364,252 414,256 414,265 C414,272 386,276 300,276 Z',
+  poolW:  'M470,278 C360,278 318,274 318,267 C318,258 384,254 470,254 C556,254 622,258 622,267 C622,274 580,278 470,278 Z',
+  wall:   'M470,280 L344,280 Q326,280 326,262 L326,114 Q326,96 344,96 L596,96 Q614,96 614,114 L614,262 Q614,280 596,280 Z',
+};
+function sample(d) {
+  const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d);
+  const tmp = document.createElementNS(NS, 'svg'); tmp.style.cssText = 'position:absolute;width:0;height:0'; tmp.appendChild(p); document.body.appendChild(tmp);
+  const L = p.getTotalLength(), pts = [];
+  for (let i = 0; i < N; i++) { const q = p.getPointAtLength(L * i / N); pts.push([q.x, q.y]); }
+  tmp.remove(); return pts;
+}
+const P = Object.fromEntries(Object.entries(SHAPES).map(([k, d]) => [k, sample(d)]));
+const mix = (a, b, t) => a.map((p, i) => [p[0] + (b[i][0] - p[0]) * t, p[1] + (b[i][1] - p[1]) * t]);
+function smooth(pts) { // 閉合 Catmull-Rom 轉貝茲
+  let d = `M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`;
+  for (let i = 0; i < pts.length; i++) {
+    const p0 = pts[(i - 1 + N) % N], p1 = pts[i], p2 = pts[(i + 1) % N], p3 = pts[(i + 2) % N];
+    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6], c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+    d += `C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;
+  }
+  return d + 'Z';
+}
+const bbox = pts => { let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9; pts.forEach(([x, y]) => { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }); return { x0, x1, y0, y1, cx: (x0 + x1) / 2, w: x1 - x0, h: y1 - y0 }; };
+
+const ease = { io: t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, out: t => 1 - Math.pow(1 - t, 3), in: t => t * t * t,
+  back: t => { const c = 1.7; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); } };
+// 形狀時間軸：[開始ms, 結束ms, 從, 到, 緩動]
+const MORPH = [
+  [1800, 2150, 'egg', 'squash', 'out'],
+  [2150, 2850, 'squash', 'mound', 'in'],
+  [2850, 3350, 'mound', 'pool', 'out'],
+  [3350, 4050, 'pool', 'poolW', 'io'],
+  [4050, 4950, 'poolW', 'wall', 'back'],
+  [7600, 8200, 'wall', 'poolW', 'in'],
+  [8200, 8800, 'poolW', 'pool', 'io'],
+  [8800, 9400, 'pool', 'mound', 'out'],
+  [9400, 9950, 'mound', 'stretch', 'out'],
+  [9950, 10350, 'stretch', 'egg', 'back'],
+];
+const END = 10900;
+function shapeAt(t) {
+  if (t < MORPH[0][0] || t >= MORPH[MORPH.length - 1][1]) return null;
+  for (const [a, b, f, g, e] of MORPH) if (t >= a && t < b) return mix(P[f], P[g], ease[e]((t - a) / (b - a)));
+  return t < 7600 ? P.wall : P.egg;
+}
+const clamp01 = x => Math.max(0, Math.min(1, x));
+const seg = (t, a, b) => clamp01((t - a) / (b - a));
+
+// 甩出去再落回水灘的液滴：[起點x, 起點y, 落點x, 弧高, 半徑, 出發ms, 落地ms]
+const DROPS = [
+  [250, 222, 196, 70, 14, 2250, 3000], [350, 222, 404, 80, 13, 2300, 3050], [300, 214, 252, 110, 11, 2350, 3150],
+  [270, 236, 222, 40, 10, 2450, 3000], [330, 236, 384, 50, 10, 2400, 2980],
+  // 變回原形時，雪牆上方被吸回去的液滴
+  [420, 110, 300, 90, 12, 7700, 8500], [520, 110, 300, 120, 13, 7750, 8600],
+];
+function dropAt(dr, t) {
+  const [x0, y0, x1, hgt, r, a, b] = dr; if (t < a || t > b) return null;
+  const k = (t - a) / (b - a), yEnd = 262;
+  return [x0 + (x1 - x0) * k, y0 + (yEnd - y0) * k - hgt * 4 * k * (1 - k), r * (1 - .35 * k)];
+}
+
+// 毛蟹路徑：頭上 → 跳起 → 飛到雪牆上 → 回來
+const CRAB_REST = [0, 0], CRAB_UP = [0, -70], CRAB_WALL = [170, -44];
+function crabAt(t) {
+  const arc = (a, b, k, h) => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k - h * 4 * k * (1 - k)];
+  if (t < 2100) return CRAB_REST;
+  if (t < 2700) return arc(CRAB_REST, CRAB_UP, ease.out(seg(t, 2100, 2700)), 0);
+  if (t < 4300) return [CRAB_UP[0], CRAB_UP[1] + Math.sin((t - 2700) / 160) * 4];
+  if (t < 5050) return arc(CRAB_UP, CRAB_WALL, ease.io(seg(t, 4300, 5050)), 50);
+  if (t < 7700) return CRAB_WALL;
+  if (t < 9500) return arc(CRAB_WALL, CRAB_UP, ease.io(seg(t, 7700, 8400)), 30);
+  if (t < 10300) return arc(CRAB_UP, CRAB_REST, ease.in(seg(t, 9500, 10300)), 0);
+  return CRAB_REST;
+}
+
+const WALL_BRICKS = Array.from({ length: 5 }, (_, r) => Array.from({ length: 6 }, (_, c) => {
+  const x = 332 + c * 46 + (r % 2 ? 23 : 0), y = 110 + r * 34;
+  return x + 42 <= 610 ? `<rect x="${x}" y="${y}" width="42" height="30" rx="8" fill="url(#g-wall)" stroke="#9cc6dd" stroke-width="2"/>` : '';
+}).join('')).join('');
+
+demo.innerHTML = `
+  <defs>
+    <!-- 黏液濾鏡：模糊後把透明度拉陡，靠近的形狀會黏成一團；再膨脹一圈當外框 -->
+    <filter id="goo" filterUnits="userSpaceOnUse" x="0" y="0" width="800" height="340">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
+      <feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="g"/>
+      <feMorphology in="g" operator="dilate" radius="2.4" result="fat"/>
+      <feFlood flood-color="#3a3440"/><feComposite in2="fat" operator="in" result="edge"/>
+      <feComposite in="SourceGraphic" in2="g" operator="atop" result="fill"/>
+      <feMerge><feMergeNode in="edge"/><feMergeNode in="g"/><feMergeNode in="fill"/></feMerge>
+    </filter>
+    <linearGradient id="g-blob" gradientUnits="userSpaceOnUse" x1="0" y1="96" x2="0" y2="280">
+      <stop offset="0" stop-color="#F8FBFD"/><stop offset=".6" stop-color="#EEF7FB"/><stop offset="1" stop-color="#A8D8F0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="340" fill="#e8f3f9"/>
+  <path d="M0,280 C200,268 600,268 800,280 V340 H0 Z" fill="#f6fafc"/>
+  <g fill="#fff" opacity=".9">${[[90, 60], [220, 40], [520, 50], [700, 80], [640, 30]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3"/>`).join('')}</g>
+  <g id="typhoon" opacity="0"><g transform="translate(720 150)"><g id="spin"><circle r="44" fill="#c9d7e2" opacity=".7"/><path d="M0,-34 C30,-34 40,-6 24,10 C14,20 -6,18 -10,6 M0,34 C-30,34 -40,6 -24,-10 C-14,-20 6,-18 10,-6" fill="none" stroke="#7d97ad" stroke-width="7" stroke-linecap="round"/><circle r="6" fill="#7d97ad"/></g></g></g>
+  <g id="wind" stroke="#8fb2c8" stroke-width="5" stroke-linecap="round" fill="none" opacity="0">
+    <path d="M660,120 h-60 q-14,0 -14,-12"/><path d="M670,170 h-80"/><path d="M660,220 h-56 q-14,0 -14,12"/>
+  </g>
+  <ellipse id="shadow" cx="300" cy="276" rx="62" ry="7" fill="#000" opacity=".08"/>
+  <g id="static" transform="translate(${OX} ${OY})">${body()}<g id="sface">${FACE.base}</g>${scarf()}${STAR(124, 137, 9)}</g>
+  <g id="liquid" filter="url(#goo)" style="display:none"><path id="blob" fill="url(#g-blob)"/><g id="drops" fill="#dff0f8"></g></g>
+  <g id="liquidFace" style="display:none">${FACE.base}</g>
+  <g id="wallDeco" opacity="0">${WALL_BRICKS}<g transform="translate(370 64)">${FACE.serious}</g></g>
+  <g id="crabG">${'<g transform="translate(' + OX + ' ' + OY + ')">' + crab('calm') + '</g>'}</g>`;
+
+const $d = id => demo.querySelector('#' + id);
+const CAPS = [[0, '北海道君：「颱風要來了？交給我，道。」'], [1900, '（液化中……）'], [4050, '（重組成雪牆）'], [5300, '北海道君：「這就是我的方式，道。」'], [7600, '（變回原狀）'], [10400, '']];
+function render(t) {
+  const shp = shapeAt(t);
+  $d('static').style.display = shp ? 'none' : '';
+  $d('liquid').style.display = shp ? '' : 'none';
+  $d('liquidFace').style.display = 'none';
+  if (shp) {
+    $d('blob').setAttribute('d', smooth(shp));
+    const b = bbox(shp);
+    // 臉跟著團塊走，團塊太扁時淡出
+    const vis = clamp01((b.h - 60) / 50) * (t < 7600 || t > 9000 ? 1 : 0) * (t > 4000 && t < 9000 ? 0 : 1);
+    if (vis > 0) {
+      const lf = $d('liquidFace'); lf.style.display = '';
+      const s = Math.min(1, b.h / 134), cy = b.y0 + b.h * .45;
+      lf.setAttribute('transform', `translate(${b.cx} ${cy}) scale(${Math.min(1, b.w / 132)} ${s}) translate(-100 -104)`);
+      lf.setAttribute('opacity', vis);
+    }
+    $d('shadow').setAttribute('cx', b.cx); $d('shadow').setAttribute('rx', b.w * .48);
+  } else { $d('shadow').setAttribute('cx', 300); $d('shadow').setAttribute('rx', 62); }
+  $d('drops').innerHTML = DROPS.map(dr => dropAt(dr, t)).filter(Boolean).map(([x, y, r]) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}"/>`).join('');
+  const deco = t < 7600 ? seg(t, 4700, 5100) : 1 - seg(t, 7600, 7800);
+  $d('wallDeco').setAttribute('opacity', deco.toFixed(2));
+  const [cx, cy] = crabAt(t); $d('crabG').setAttribute('transform', `translate(${cx} ${cy})`);
+  const storm = t < 9000 ? seg(t, 0, 500) : 1 - seg(t, 9000, 9600);
+  $d('typhoon').setAttribute('opacity', storm); $d('spin').setAttribute('transform', `rotate(${-t / 6})`);
+  $d('wind').setAttribute('opacity', storm);
+  // 撞到雪牆後風往回彈
+  const hit = t > 5100 && t < 7600;
+  $d('wind').querySelectorAll('path').forEach((p, i) => {
+    const k = ((t / 900) + i * .3) % 1;
+    p.setAttribute('transform', hit ? `translate(${-30 * Math.sin(k * Math.PI)} ${-14 * k * (i - 1)})` : `translate(${(-(t / 6) % 40)} 0)`);
+  });
+  let cap = ''; for (const [a, c] of CAPS) if (t >= a) cap = c;
+  document.getElementById('cap').textContent = cap || '按「播放」再看一次。';
+}
+render(0); document.getElementById('cap').textContent = '按「播放」看變形。';
+let raf = 0;
+document.getElementById('play').onclick = () => {
+  cancelAnimationFrame(raf);
+  const t0 = performance.now();
+  const loop = now => { const t = now - t0; render(Math.min(t, END)); if (t < END) raf = requestAnimationFrame(loop); };
+  raf = requestAnimationFrame(loop);
+};
+window.__render = render;
+
+</script>
