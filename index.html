@@ -5,7 +5,7 @@
 <title>和萊姆圖鑑</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="review.css">
+<link rel="stylesheet" href="review.css?v=3bc2570f">
 <style>
 /* 版面：角色圖鑑。卡片與立繪在深淺色主題都維持紙色 */
 :root {
@@ -113,7 +113,7 @@ footer { margin-top: 40px; color: var(--muted); font-size: .88rem; }
 
 <div class="wrap" id="app"></div>
 
-<script src="walime.js"></script>
+<script src="walime.js?v=f273d093"></script>
 <script>
 const app = document.getElementById('app');
 const byId = id => CHARS.find(c => c.id === id);
@@ -216,4 +216,4 @@ function route() {
 addEventListener('hashchange', route);
 route();
 </script>
-<script src="review.js"></script>
+<script src="review.js?v=ee9f950a"></script>

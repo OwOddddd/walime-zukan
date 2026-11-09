@@ -601,10 +601,9 @@ const BOAT = `<g transform="translate(30 190)"><path d="M-22,0 H22 L16,10 H-16 Z
   <path d="M-28,14 q7,-4 14,0 t14,0 t14,0 t14,0" fill="none" stroke="#3f8fc8" stroke-width="2.6" stroke-linecap="round"/></g>`;
 // 撕成兩半的紙（內部分裂）
 // 手拿的牌子：左手握住棍子下方，牌子舉在左上（手畫在棍子上面）
-const HOLD_SIGN = (t, limb, side = 'L') => { const w = auxW(t) * 1.15, R = side === 'R', hx = R ? 168 : 32, a = R ? 22 : -22;
-  return `<g transform="translate(${hx} 138) rotate(${a})"><path d="M0,4 V-30" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/><path d="M0,4 V-30" stroke="#a8743e" stroke-width="2.4" stroke-linecap="round"/>
-  <rect x="${-w / 2}" y="-54" width="${w}" height="26" rx="3" fill="#fbf3dc" stroke="var(--ink)" stroke-width="2.4"/><text y="-35.5" font-size="14" ${AUX_TXT}>${t}</text></g>
-  ${R ? `<ellipse cx="164" cy="132" rx="9" ry="14" transform="rotate(-30 164 132)" fill="${limb}" stroke="var(--ink)" stroke-width="3.5"/>` : `<ellipse cx="36" cy="132" rx="9" ry="14" transform="rotate(30 36 132)" fill="${limb}" stroke="var(--ink)" stroke-width="3.5"/>`}`; };
+const HOLD_SIGN = (t, limb, side = 'L') => { const w = auxW(t) * 1.15, R = side === 'R';
+  return `<g transform="translate(${R ? 171 : 29} 150) rotate(${R ? 12 : -12})"><path d="M0,0 V-34" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/><path d="M0,0 V-34" stroke="#a8743e" stroke-width="2.4" stroke-linecap="round"/>
+  <rect x="${-w / 2}" y="-58" width="${w}" height="26" rx="3" fill="#fbf3dc" stroke="var(--ink)" stroke-width="2.4"/><text y="-39.5" font-size="14" ${AUX_TXT}>${t}</text></g>`; };
 // 內部分裂：一根路標上三塊箭頭牌指向不同方向（川崎、湘南、箱根各走各的）
 const SPLIT_SIGN = (() => { const board = (t, x, y, dir, rot, d) => `<g transform="translate(${x} ${y}) rotate(${rot})"><g class="sway" style="animation-delay:-${d}s;animation-duration:1.1s">
     <path d="${dir > 0 ? 'M-18,-8 H10 L20,0 L10,8 H-18 Z' : 'M18,-8 H-10 L-20,0 L-10,8 H18 Z'}" fill="#fbf3dc" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
@@ -932,8 +931,7 @@ const karuta = (x, y, rot = 0) => `<g transform="translate(${x} ${y}) rotate(${r
   <path d="M3,-4 C1,-3.4 -.4,-2 -1,0 L1.6,-.6 Z" fill="var(--ink)"/></g></g>`;
 // 焼きまんじゅう：竹籤串四顆，刷上甜味噌醬
 // 焼きまんじゅう：竹籤串四顆，刷上甜味噌醬。左手握住竹籤最下方（手畫在竹籤上面，看起來是握著）
-const YAKIMAN = `<ellipse cx="36" cy="132" rx="9" ry="14" transform="rotate(30 36 132)" fill="#c8323a" stroke="var(--ink)" stroke-width="3.5"/>
-  <g transform="translate(22 108) rotate(-20)"><path d="M0,-34 V32" stroke="var(--ink)" stroke-width="4.5" stroke-linecap="round"/><path d="M0,-34 V32" stroke="#d9c07a" stroke-width="2" stroke-linecap="round"/>
+const YAKIMAN = `<g transform="translate(16 120) rotate(-20)"><path d="M0,-34 V32" stroke="var(--ink)" stroke-width="4.5" stroke-linecap="round"/><path d="M0,-34 V32" stroke="#d9c07a" stroke-width="2" stroke-linecap="round"/>
   ${[-26, -12, 2, 16].map(y => `<ellipse cx="0" cy="${y}" rx="11" ry="7.5" fill="#c9782f" stroke="var(--ink)" stroke-width="2.3"/><path d="M-6,${y - 3} q6,-3 12,0" fill="none" stroke="#e9a35a" stroke-width="2" stroke-linecap="round"/>`).join('')}</g>`;
 CHARS.push({
   id: 'gunma', name: '群馬君', kind: '都道府縣・群馬縣', tagColor: '#c8323a', motto: '「つる舞う形の群馬県！」',
@@ -1518,10 +1516,10 @@ const harisen = (x, y, rot) => `<g transform="translate(${x} ${y}) rotate(${rot}
   <rect x="-5.5" y="-10" width="11" height="14" rx="2" fill="#e8509a" stroke="var(--ink)" stroke-width="2.2"/></g>`;
 // 串炸：竹籤上的炸物，旁邊是共用的醬汁盆（二度づけ禁止）
 // 串炸：左手握竹籤根部朝上舉著，兩塊串炸、頂端沾了深色醬汁（輕晃）；「二度づけ禁止」的共用醬汁盒放在腳邊
-const KUSHIKATSU = `<g class="sway"><g transform="translate(30 140) rotate(-12)"><path d="M0,0 V-58" stroke="var(--ink)" stroke-width="3.6" stroke-linecap="round"/><path d="M0,0 V-58" stroke="#e2c897" stroke-width="1.6" stroke-linecap="round"/>
+const KUSHIKATSU = `<g class="sway"><g transform="translate(28 150) rotate(-12)"><path d="M0,0 V-58" stroke="var(--ink)" stroke-width="3.6" stroke-linecap="round"/><path d="M0,0 V-58" stroke="#e2c897" stroke-width="1.6" stroke-linecap="round"/>
   ${[-26, -46].map(y => `<rect x="-7" y="${y - 10}" width="14" height="20" rx="6" fill="#d9993e" stroke="var(--ink)" stroke-width="2.2"/><g fill="#f2c47a"><circle cx="-2.5" cy="${y - 4}" r="1.3"/><circle cx="2.5" cy="${y + 1}" r="1.3"/><circle cx="-2" cy="${y + 5}" r="1.3"/></g>`).join('')}
   <path d="M-7,-48 C-7,-55 -4,-56 0,-56 C4,-56 7,-55 7,-48 C5,-46 4,-43 3,-45 C2,-47 1,-45 0,-43 C-1,-45 -3,-47 -4,-44 C-5,-46 -6,-47 -7,-48 Z" fill="#4a2a1a" stroke="var(--ink)" stroke-width="1.6" stroke-linejoin="round"/></g></g>
-  <ellipse cx="36" cy="132" rx="9" ry="14" transform="rotate(30 36 132)" fill="#e8509a" stroke="var(--ink)" stroke-width="3.5"/>`;
+`;
 // 二度づけ禁止的共用醬汁盆：右手端著
 const SAUCE_PAN = `<g transform="translate(172 146)"><rect x="-20" y="-4" width="40" height="15" rx="3" fill="#c0c6cc" stroke="var(--ink)" stroke-width="2.4"/><rect x="-16" y="-1" width="32" height="6" rx="2" fill="#4a2a1a"/><path d="M-12,-1 h8" stroke="#6a4030" stroke-width="1.4" stroke-linecap="round"/></g>`;
 CHARS.push({
@@ -2021,7 +2019,7 @@ CHARS.push({
   id: 'ehime', name: '愛媛君', kind: '都道府縣・愛媛縣', tagColor: '#f28a1e', motto: '「水龍頭會流出蜜柑汁？……機場那個啦。」',
   colors: [['蜜柑橙', '#F28A1E'], ['瀨戶內藍', '#2F6EA3']],
   look: f => slime({ shape: 'egg', grad: [[0, '#fffbf4'], [.55, '#fdebd2'], [1, '#f6c48a']], limb: '#2f6ea3', face: f.face || 'hinata', armUp: f.armUp,
-    head: MIKAN_TAP, front: f.armUp ? `<g class="sway">${botchan(178, 90, 6)}</g>` : '<ellipse cx="164" cy="132" rx="9" ry="14" transform="rotate(-30 164 132)" fill="#2f6ea3" stroke="var(--ink)" stroke-width="3.5"/>' + botchan(170, 132, 6), extra: f.extra }),
+    head: MIKAN_TAP, front: f.armUp ? `<g class="sway">${botchan(178, 90, 6)}</g>` : botchan(169, 136, 6), extra: f.extra }),
   faces: [
     { face: 'calm', name: '穏やか', k: '( ˘ω˘ )', q: '縣民自己選的特質：穏やか' },
     { face: 'sweat', extra: BLUE_DROP + bubble('ただの水', 36, 52, 9.5), name: '水龍頭', k: '(・ω・;)', q: '「家裡的水龍頭不會流出蜜柑汁啦。」' },
