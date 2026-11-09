@@ -93,13 +93,17 @@ dd { margin: 0; }
 .wave-l { transform-box: fill-box; transform-origin: 100% 100%; animation: wave 1.2s ease-in-out infinite alternate; }
 .wave-r { transform-box: fill-box; transform-origin: 0% 100%; animation: wave 1.2s ease-in-out infinite alternate-reverse; }
 @keyframes wave { from { transform: rotate(-10deg); } to { transform: rotate(12deg); } }
+.updown { animation: updown .45s ease-in-out infinite alternate; }
+@keyframes updown { from { transform: translateY(2px); } to { transform: translateY(-4px); } }
+.wave-l.big, .wave-r.big { animation-name: wave-big; animation-duration: .5s; }
+@keyframes wave-big { from { transform: rotate(-28deg); } to { transform: rotate(26deg); } }
 .shake { transform-box: fill-box; transform-origin: 50% 100%; animation: shake .25s linear infinite alternate; }
 @keyframes shake { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
 .nod { transform-box: fill-box; transform-origin: 100% 40%; animation: nod 1.6s ease-in-out infinite alternate; }
 @keyframes nod { from { transform: rotate(-6deg); } to { transform: rotate(10deg); } }
 .sway { transform-box: fill-box; transform-origin: 50% 100%; animation: sway .9s ease-in-out infinite alternate; }
 @keyframes sway { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
-@media (prefers-reduced-motion: reduce) { .bob, .float, .blink, .spin, .swing, .wave-l, .wave-r, .shake, .nod, .sway { animation: none; } .card { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .bob, .float, .blink, .spin, .swing, .wave-l, .wave-r, .shake, .nod, .sway, .updown { animation: none; } .card { transition: none; } }
 footer { margin-top: 40px; color: var(--muted); font-size: .88rem; }
 </style>
 
