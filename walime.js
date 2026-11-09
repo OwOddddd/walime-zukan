@@ -149,7 +149,7 @@ const phoenixPin = `<g class="swing" style="transform-origin:124px 62px">
   <path d="M140,34 l-4,14 M146,35 l-1,12" stroke="#c9a23e" stroke-width="1.6"/><circle cx="136" cy="49" r="2.5" fill="#e1bf55"/><circle cx="145" cy="48" r="2.5" fill="#e1bf55"/></g>`;
 const goldLeaf = '<g fill="#e1bf55" opacity=".85"><rect x="72" y="140" width="5" height="5" transform="rotate(20 74 142)"/><rect x="126" y="150" width="4" height="4" transform="rotate(-15 128 152)"/><rect x="104" y="160" width="3.5" height="3.5"/><rect x="60" y="120" width="3" height="3"/></g>';
 // 場面話：右手從身側伸到臉前，扇子張開只遮住嘴，眼睛露出來
-const KYO_FAN_MOUTH = `<ellipse cx="133" cy="138" rx="9" ry="19" transform="rotate(80 133 138)" fill="#9d5b8b" stroke="var(--ink)" stroke-width="3.5"/>${fan(112, 134, 28, -172, -100)}<ellipse cx="113" cy="136" rx="7" ry="6" fill="#9d5b8b" stroke="var(--ink)" stroke-width="3"/>`;
+const KYO_FAN_MOUTH = `${fan(112, 134, 28, -172, -100)}<ellipse cx="132" cy="136" rx="9" ry="21" transform="rotate(86 132 136)" fill="#9d5b8b" stroke="var(--ink)" stroke-width="3.5"/>`;
 CHARS.push({
   id: 'kyoto', name: '京都君', kind: '都道府縣・京都府', tagColor: '#9d5b8b', motto: '「哎呀，真是『熱鬧』呢。」',
   colors: [['京紫', '#9D5B8B'], ['抹茶綠', '#8DB06A']],
@@ -470,7 +470,7 @@ function tetsubin(mood = 'warm') {
   const id = 'tb' + (uid++), body = 'M78,47 C70,41 70,27 82,22 C90,19 110,19 118,22 C130,27 130,41 122,47 Z';
   const dots = []; for (let y = 27, r = 0; y <= 44; y += 4.5, r++) for (let x = 72 + (r % 2) * 2.5; x <= 128; x += 5) dots.push(`<circle cx="${x}" cy="${y}" r="1.4"/>`);
   const steam = mood === 'boil'
-    ? ['M144,14 q-4,-4 0,-8 q4,-4 0,-8', 'M153,17 q-3,-3 0,-6 q3,-3 0,-6', 'M85,15 q-5,-1 -7,-6 q-2,-5 -7,-6', 'M115,15 q5,-1 7,-6 q2,-5 7,-6']
+    ? ['M144,14 q-4,-4 0,-8 q4,-4 0,-8', 'M153,17 q-3,-3 0,-6 q3,-3 0,-6']
       .map(d => `<path d="${d}" fill="none" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>`).join('')
     : mood === 'warm' ? '<path d="M143,12 q-4,-5 0,-10 q4,-5 0,-10" fill="none" stroke="#b9b4aa" stroke-width="2.4" stroke-linecap="round"/>' : '';
   const bail = mood === 'boil' ? 'M85,23 C85,12 115,12 115,23' : 'M85,23 C85,2 115,2 115,23'; // 沸騰時提環倒向後方，讓出浮起的蓋子
@@ -582,7 +582,7 @@ const NO_ONSEN = `<g transform="translate(30 56)"><path d="M-12,6 A12,6 0 0 0 12
 // 小狗（西郷さん的愛犬）
 // 西郷さん的愛犬（薩摩犬）：側面站姿，往前伸的口鼻和黑鼻頭、三角立耳、往上捲到背上的尾巴、紅項圈
 const DOG = `<g transform="translate(30 172)">
-  <path d="M-13,-4 C-18,-8 -20,-15 -15,-18 C-12,-16 -12,-10 -9,-7" fill="none" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/><path d="M-13,-4 C-18,-8 -20,-15 -15,-18 C-12,-16 -12,-10 -9,-7" fill="none" stroke="#c98a4a" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M-13,-3 C-17,-6 -19,-12 -17,-18" fill="none" stroke="var(--ink)" stroke-width="5.4" stroke-linecap="round"/><path d="M-13,-3 C-17,-6 -19,-12 -17,-18" fill="none" stroke="#c98a4a" stroke-width="3" stroke-linecap="round"/>
   <path d="M-11,6 V18 M-5,7 V18 M5,7 V18 M10,6 V18" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/><path d="M-11,6 V18 M-5,7 V18 M5,7 V18 M10,6 V18" stroke="#c98a4a" stroke-width="2.6" stroke-linecap="round"/>
   <path d="M-14,0 C-14,-6 -8,-8 0,-8 C6,-8 10,-6 12,-2 C13,4 10,9 2,9 C-6,9 -14,7 -14,0 Z" fill="#c98a4a" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
   <path d="M8,-6 C8,-14 12,-18 17,-17 C20,-16 22,-14 25,-13 C28,-12 28,-8 25,-7 C21,-6 17,-5 14,-2 Z" fill="#c98a4a" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
@@ -601,14 +601,15 @@ const BOAT = `<g transform="translate(30 190)"><path d="M-22,0 H22 L16,10 H-16 Z
   <path d="M-28,14 q7,-4 14,0 t14,0 t14,0 t14,0" fill="none" stroke="#3f8fc8" stroke-width="2.6" stroke-linecap="round"/></g>`;
 // 撕成兩半的紙（內部分裂）
 // 手拿的牌子：左手握住棍子下方，牌子舉在左上（手畫在棍子上面）
-const HOLD_SIGN = (t, limb, side = 'L') => { const w = auxW(t) * 1.3, h = w / 2, R = side === 'R';
-  return `<g transform="translate(${R ? 174 : 26} 0)"><path d="M0,74 V138" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/><path d="M0,74 V138" stroke="#a8743e" stroke-width="2.4" stroke-linecap="round"/>
-  <rect x="${-h}" y="50" width="${w}" height="26" rx="3" fill="#fbf3dc" stroke="var(--ink)" stroke-width="2.4"/><text y="68.5" font-size="14" ${AUX_TXT}>${t}</text></g>
+const HOLD_SIGN = (t, limb, side = 'L') => { const w = auxW(t) * 1.15, R = side === 'R', hx = R ? 168 : 32, a = R ? 22 : -22;
+  return `<g transform="translate(${hx} 138) rotate(${a})"><path d="M0,4 V-30" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/><path d="M0,4 V-30" stroke="#a8743e" stroke-width="2.4" stroke-linecap="round"/>
+  <rect x="${-w / 2}" y="-54" width="${w}" height="26" rx="3" fill="#fbf3dc" stroke="var(--ink)" stroke-width="2.4"/><text y="-35.5" font-size="14" ${AUX_TXT}>${t}</text></g>
   ${R ? `<ellipse cx="164" cy="132" rx="9" ry="14" transform="rotate(-30 164 132)" fill="${limb}" stroke="var(--ink)" stroke-width="3.5"/>` : `<ellipse cx="36" cy="132" rx="9" ry="14" transform="rotate(30 36 132)" fill="${limb}" stroke="var(--ink)" stroke-width="3.5"/>`}`; };
 // 內部分裂：一根路標上三塊箭頭牌指向不同方向（川崎、湘南、箱根各走各的）
-const SPLIT_SIGN = (() => { const board = (t, y, dir, rot) => { const w = 40; return `<g transform="translate(0 ${y}) rotate(${rot})"><path d="${dir > 0 ? `M-4,-8 H${w - 10} L${w},0 L${w - 10},8 H-4 Z` : `M4,-8 H${-w + 10} L${-w},0 L${-w + 10},8 H4 Z`}" fill="#fbf3dc" stroke="var(--ink)" stroke-width="2"/><text x="${dir * (w / 2 - 2)}" y="3.6" font-size="9.5" ${AUX_TXT}>${t}</text></g>`; };
-  return `<g transform="translate(28 42)"><path d="M0,-6 V56" stroke="var(--ink)" stroke-width="4.4" stroke-linecap="round"/><path d="M0,-6 V56" stroke="#a8743e" stroke-width="2" stroke-linecap="round"/>
-  ${board('川崎', 0, 1, -14)}${board('湘南', 16, -1, 10)}${board('箱根', 32, 1, 18)}</g>`; })();
+const SPLIT_SIGN = (() => { const board = (t, x, y, dir, rot, d) => `<g transform="translate(${x} ${y}) rotate(${rot})"><g class="sway" style="animation-delay:-${d}s;animation-duration:1.1s">
+    <path d="${dir > 0 ? 'M-18,-8 H10 L20,0 L10,8 H-18 Z' : 'M18,-8 H-10 L-20,0 L-10,8 H18 Z'}" fill="#fbf3dc" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
+    <text x="${dir > 0 ? -3 : 3}" y="3.6" font-size="10" ${AUX_TXT}>${t}</text></g></g>`;
+  return board('川崎', 30, 60, -1, 12, 0) + board('湘南', 26, 96, -1, -10, .4) + board('箱根', 172, 66, 1, -10, .7); })();
 const TORN = `<g transform="translate(30 56)"><path d="M-18,-12 H-1 L-4,-6 L1,0 L-3,6 L0,12 H-18 Z" fill="#fff" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round" transform="rotate(-8) translate(-2 0)"/><path d="M4,-12 H20 V12 H5 L2,6 L6,0 L1,-6 Z" fill="#fff" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round" transform="rotate(8) translate(3 0)"/>
   <text x="-10" y="4" font-size="9" ${AUX_TXT} transform="rotate(-8)">神奈</text><text x="13" y="4" font-size="9" ${AUX_TXT} transform="rotate(8)">川</text></g>`;
 // 分成三塊的縣（會津・中通・濱通）
@@ -625,8 +626,8 @@ const IMONI_VS = `<g transform="translate(30 32) scale(1.45)">${[[-11, '#8a5a32'
 // 粗線問號（放在身體外框外）
 const QMARK = (x, y) => `<path d="M${x - 7},${y - 8} q0,-7 7,-7 q7,0 7,7 q0,5 -7,8 v5" ${SW(4)}/><circle cx="${x}" cy="${y + 12.5}" r="2.6" fill="var(--ink)"/>`;
 // 小火苗：鬥爭心
-const FLAME = (x = 30, y = 56) => `<g transform="translate(${x} ${y})" class="sway"><path d="M0,-20 C6,-12 14,-8 12,2 C11,10 6,14 0,14 C-6,14 -11,10 -12,2 C-13,-6 -6,-8 -4,-16 C-2,-10 0,-8 2,-8 C2,-12 0,-16 0,-20 Z" fill="#ef6a2e" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/>
-  <path d="M0,-2 C4,2 6,6 4,10 C3,12 1,13 0,13 C-2,13 -4,12 -4,9 C-4,5 -1,4 0,-2 Z" fill="#f8c53a"/></g>`;
+const FLAME = (x = 30, y = 56) => `<g transform="translate(${x} ${y})"><g class="sway"><path d="M0,-20 C6,-12 14,-8 12,2 C11,10 6,14 0,14 C-6,14 -11,10 -12,2 C-13,-6 -6,-8 -4,-16 C-2,-10 0,-8 2,-8 C2,-12 0,-16 0,-20 Z" fill="#ef6a2e" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M0,-2 C4,2 6,6 4,10 C3,12 1,13 0,13 C-2,13 -4,12 -4,9 C-4,5 -1,4 0,-2 Z" fill="#f8c53a"/></g></g>`;
 const VEIN = `<g transform="translate(40 50)" fill="none" stroke="#d23b33" stroke-width="2.8" stroke-linecap="round"><path d="M-8,-3 C-3,-3 -3,-8 -3,-8 M3,-8 C3,-3 8,-3 8,-3 M8,3 C3,3 3,8 3,8 M-3,8 C-3,3 -8,3 -8,3"/></g>`;
 // 「無盡」的信封（朋友聚會固定存錢）
 const MUJIN = `<g transform="translate(30 58) rotate(-8)"><rect x="-16" y="-11" width="32" height="22" rx="2" fill="#fbf3dc" stroke="var(--ink)" stroke-width="2.2"/><path d="M-16,-11 L0,2 L16,-11" fill="none" stroke="var(--ink)" stroke-width="1.8"/><text y="9" font-size="8.5" ${AUX_TXT} fill="#c8323a">無尽</text></g>`;
@@ -931,9 +932,9 @@ const karuta = (x, y, rot = 0) => `<g transform="translate(${x} ${y}) rotate(${r
   <path d="M3,-4 C1,-3.4 -.4,-2 -1,0 L1.6,-.6 Z" fill="var(--ink)"/></g></g>`;
 // 焼きまんじゅう：竹籤串四顆，刷上甜味噌醬
 // 焼きまんじゅう：竹籤串四顆，刷上甜味噌醬。左手握住竹籤最下方（手畫在竹籤上面，看起來是握著）
-const YAKIMAN = `<g transform="translate(22 108) rotate(-20)"><path d="M0,-34 V32" stroke="var(--ink)" stroke-width="4.5" stroke-linecap="round"/><path d="M0,-34 V32" stroke="#d9c07a" stroke-width="2" stroke-linecap="round"/>
-  ${[-26, -12, 2, 16].map(y => `<ellipse cx="0" cy="${y}" rx="11" ry="7.5" fill="#c9782f" stroke="var(--ink)" stroke-width="2.3"/><path d="M-6,${y - 3} q6,-3 12,0" fill="none" stroke="#e9a35a" stroke-width="2" stroke-linecap="round"/>`).join('')}</g>
-  <ellipse cx="36" cy="132" rx="9" ry="14" transform="rotate(30 36 132)" fill="#c8323a" stroke="var(--ink)" stroke-width="3.5"/>`;
+const YAKIMAN = `<ellipse cx="36" cy="132" rx="9" ry="14" transform="rotate(30 36 132)" fill="#c8323a" stroke="var(--ink)" stroke-width="3.5"/>
+  <g transform="translate(22 108) rotate(-20)"><path d="M0,-34 V32" stroke="var(--ink)" stroke-width="4.5" stroke-linecap="round"/><path d="M0,-34 V32" stroke="#d9c07a" stroke-width="2" stroke-linecap="round"/>
+  ${[-26, -12, 2, 16].map(y => `<ellipse cx="0" cy="${y}" rx="11" ry="7.5" fill="#c9782f" stroke="var(--ink)" stroke-width="2.3"/><path d="M-6,${y - 3} q6,-3 12,0" fill="none" stroke="#e9a35a" stroke-width="2" stroke-linecap="round"/>`).join('')}</g>`;
 CHARS.push({
   id: 'gunma', name: '群馬君', kind: '都道府縣・群馬縣', tagColor: '#c8323a', motto: '「つる舞う形の群馬県！」',
   colors: [['達摩紅', '#C8323A'], ['湯畑碧', '#8FD3C4']],
@@ -1052,7 +1053,7 @@ CHARS.push({
   look: f => slime({ shape: 'egg', grad: [[0, '#f5faff'], [.55, '#dbeaf7'], [1, '#5c9bd1']], limb: '#c8323a', face: f.face || 'wink', armUp: f.armUp,
     head: marineCap, front: f.noShumai ? '' : `<g transform="translate(164 142) scale(1.3) translate(-164 -142)">${SHUMAI(164, 142, -10)}</g>`, extra: f.extra }),
   faces: [
-    { face: 'smileW', extra: HOLD_SIGN('横浜', '#c8323a'), name: '出身橫濱', k: '( ^ω^ )', q: '被問出身只說「橫濱」，不說「神奈川」' },
+    { face: 'smileW', extra: signPost('横浜'), name: '出身橫濱', k: '( ^ω^ )', q: '被問出身只說「橫濱」，不說「神奈川」' },
     { face: 'sweat', extra: SPLIT_SIGN, name: '內部分裂', k: '(・ω・;)', q: '川崎、湘南、鎌倉、箱根，每一區都有意見' },
     { face: 'open', noShumai: true, armUp: true, name: '箱根', k: '( ´∀`)', q: '大涌谷的黑蛋，吃一顆延壽七年', extra: KUROTAMAGO },
     { face: 'flat', name: '沉穩模式', k: '( ・_・)', q: '嚴肅主題專用' },
@@ -1382,14 +1383,14 @@ function kinshachi(mood = 'calm') {
     <path d="M86,9 C80,3 77,-1 79,-3 L84,1 L86,-3.5 L90.5,0.5 L95,-3.5 L97,2 L102,0 C101,6 96,10 91,12 Z" fill="${G}" stroke-width="2.2" ${K}/>
     <path d="M88,4 L89,9 M93,2 L92.5,8" stroke="#b07a1e" stroke-width="1.2" stroke-linecap="round"/>
     <path d="M78,24 L63,19 L69,26 L59,29 L69,32 L62,38 L78,35 Z" fill="${G}" stroke-width="2" ${K}/>
-    <path d="M84,51 L71,60 L79,58 L76,64 L90,55 Z" fill="${G}" stroke-width="1.8" ${K}/>
     <path d="M93,14 L99,9 L99,17 L106,15 L103,23 L110,23 L106,29" fill="${G}" stroke-width="1.8" ${K}/>
     <path d="${B}" fill="${G}"/>
     <g clip-path="url(#${id})" fill="none" stroke="#b07a1e" stroke-width="1.2">${[[78, 30], [84, 24], [82, 38], [88, 32], [90, 44], [96, 38], [98, 50], [104, 44], [110, 50], [80, 46]].map(([x, y]) => `<path d="M${x - 3.5},${y} a3.5,3.5 0 0,0 7,0"/>`).join('')}</g>
     <path d="${B}" fill="none" stroke="var(--ink)" stroke-width="2.6" stroke-linejoin="round"/>
     <path d="M137,41 L124,44 L131,48" fill="#7a2a1a" stroke="var(--ink)" stroke-width="1.6" stroke-linejoin="round"/><path d="M127,43.5 l1.5,2.4 l1.6,-2.8 M132,42.4 l1.2,2.2 l1.4,-2.6" fill="#fff" stroke="var(--ink)" stroke-width=".9"/>
-    <path d="M110,31 L112,23 L116,29 L119,22 L122,30 L126,26 L126,33" fill="${G}" stroke-width="1.6" ${K}/>
-    <circle cx="119" cy="37" r="4.6" fill="#fff" stroke="var(--ink)" stroke-width="1.8"/><circle cx="120" cy="37" r="2.3" fill="#c8323a" stroke="var(--ink)" stroke-width="1"/></g>`;
+    <path d="M93,53 C85,55 76,52 70,44 L75,45.5 L70,37 L78,43 L79,35 L84,45 C88,48 91,50 93,53 Z" fill="${G}" stroke-width="1.8" ${K}/><path d="M76,44 L83,49 M80,40 L85,47" stroke="#b07a1e" stroke-width="1" stroke-linecap="round"/>
+    <path d="M108,32 C105,27 109,22 114,24 C115,19 121,18 124,21 C128,20 132,24 130,28 C127,31 121,31 116,31 C113,32 110,33 108,32 Z" fill="#e8b84a" stroke="var(--ink)" stroke-width="1.8" stroke-linejoin="round"/><path d="M114,24 C115,27 118,28 120,27 M124,21 C124,24 126,26 128,25" fill="none" stroke="#b07a1e" stroke-width="1.1" stroke-linecap="round"/>
+    <circle cx="119" cy="38.5" r="4.4" fill="#fff" stroke="var(--ink)" stroke-width="1.8"/><circle cx="120" cy="38.5" r="2.3" fill="var(--ink)"/></g>`;
 }
 // 味噌豬排：筷子夾著一塊淋了赤味噌醬的炸豬排
 // 味噌豬排：盤子上切成四塊，淋赤味噌醬
@@ -1455,7 +1456,7 @@ CHARS.push({
 // 琵琶湖徽章：肚子上一枚圓形徽章，裡面是湖形（北湖大、南湖小）。直接把湖形畫在身上會像眼淚或打翻的水
 // 琵琶湖：照實際湖形，北湖寬、往西南收窄成細長的南湖；只加黑色描邊，不加外圈
 // 琵琶湖：照使用者在衛星圖上描的湖岸取點（北端細長往東北、西岸中段內凹、南湖是一條往南的細長水道）
-const BIWAKO = '<g transform="translate(102 148) scale(.85) translate(-21 -33.5)"><path d="M33.6,0.3 C34.4,0.6 34.1,2.5 34.5,4.2 C34.9,5.9 35.1,8.7 35.7,10.5 C36.3,12.3 37.2,13.8 38.1,15.0 C39.0,16.2 40.2,16.4 40.8,17.7 C41.4,18.9 41.8,20.9 41.5,22.5 C41.3,24.1 40.6,25.7 39.6,27.3 C38.6,28.9 37.0,30.8 35.4,32.1 C33.8,33.5 31.6,34.4 29.7,35.4 C27.8,36.4 25.4,37.2 24.0,38.4 C22.6,39.5 22.1,41.1 21.0,42.3 C19.9,43.5 18.5,44.7 17.1,45.6 C15.6,46.5 13.6,46.8 12.3,47.7 C11.0,48.5 10.0,49.3 9.3,50.7 C8.5,52.0 8.3,53.9 7.8,55.8 C7.3,57.6 6.8,59.9 6.3,61.8 C5.8,63.6 5.5,66.4 4.8,66.9 C4.1,67.4 3.1,65.7 2.4,64.8 C1.6,63.9 0.6,62.8 0.3,61.5 C0.0,60.2 0.3,58.8 0.9,57.3 C1.4,55.8 2.5,54.6 3.6,52.8 C4.6,51.0 6.8,48.2 7.2,46.5 C7.6,44.8 6.2,43.7 6.0,42.6 C5.8,41.5 5.4,41.0 5.7,39.9 C6.0,38.8 7.1,36.9 8.1,35.7 C9.1,34.4 10.3,33.5 11.7,32.4 C13.1,31.3 14.9,30.2 16.5,29.1 C18.1,27.9 20.6,26.8 21.3,25.5 C22.0,24.2 21.2,23.0 20.7,21.6 C20.1,20.2 18.6,18.4 18.0,17.1 C17.4,15.7 16.8,14.8 17.2,13.5 C17.7,12.2 19.4,10.6 20.7,9.3 C22.0,8.0 23.7,6.8 25.2,5.7 C26.7,4.6 28.3,3.3 29.7,2.4 C31.1,1.5 32.8,-0.0 33.6,0.3 Z" fill="#5aa6d8" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/></g>';
+const BIWAKO = '<g transform="translate(102 145) scale(.74) translate(-21 -33.5)"><path d="M33.6,0.3 C34.4,0.6 34.1,2.5 34.5,4.2 C34.9,5.9 35.1,8.7 35.7,10.5 C36.3,12.3 37.2,13.8 38.1,15.0 C39.0,16.2 40.2,16.4 40.8,17.7 C41.4,18.9 41.8,20.9 41.5,22.5 C41.3,24.1 40.6,25.7 39.6,27.3 C38.6,28.9 37.0,30.8 35.4,32.1 C33.8,33.5 31.6,34.4 29.7,35.4 C27.8,36.4 25.4,37.2 24.0,38.4 C22.6,39.5 22.1,41.1 21.0,42.3 C19.9,43.5 18.5,44.7 17.1,45.6 C15.6,46.5 13.6,46.8 12.3,47.7 C11.0,48.5 10.0,49.3 9.3,50.7 C8.5,52.0 8.3,53.9 7.8,55.8 C7.3,57.6 6.8,59.9 6.3,61.8 C5.8,63.6 5.5,66.4 4.8,66.9 C4.1,67.4 3.1,65.7 2.4,64.8 C1.6,63.9 0.6,62.8 0.3,61.5 C0.0,60.2 0.3,58.8 0.9,57.3 C1.4,55.8 2.5,54.6 3.6,52.8 C4.6,51.0 6.8,48.2 7.2,46.5 C7.6,44.8 6.2,43.7 6.0,42.6 C5.8,41.5 5.4,41.0 5.7,39.9 C6.0,38.8 7.1,36.9 8.1,35.7 C9.1,34.4 10.3,33.5 11.7,32.4 C13.1,31.3 14.9,30.2 16.5,29.1 C18.1,27.9 20.6,26.8 21.3,25.5 C22.0,24.2 21.2,23.0 20.7,21.6 C20.1,20.2 18.6,18.4 18.0,17.1 C17.4,15.7 16.8,14.8 17.2,13.5 C17.7,12.2 19.4,10.6 20.7,9.3 C22.0,8.0 23.7,6.8 25.2,5.7 C26.7,4.6 28.3,3.3 29.7,2.4 C31.1,1.5 32.8,-0.0 33.6,0.3 Z" fill="#5aa6d8" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/></g>';
 // 信樂燒狸貓：斗笠、大肚子、手提酒壺
 const tanuki = (mood = 'calm') => `<g transform="translate(100 32)"><g class="${mood === 'shake' ? 'shake' : ''}">
   <ellipse cy="12" rx="16" ry="14" fill="#8a5a3b" stroke="var(--ink)" stroke-width="2.6"/><ellipse cy="15" rx="10" ry="9" fill="#e9d2a8" stroke="var(--ink)" stroke-width="1.8"/>
@@ -1468,13 +1469,13 @@ const tanuki = (mood = 'calm') => `<g transform="translate(100 32)"><g class="${
 // 飛び出しぼうや：照參考照片的跑姿。黑色西瓜皮頭、粉紅圓臉、黑圓眼、八字眉的苦臉，紅上衣、黃橘褲、咖啡色鞋；
 // 往左衝：前手平伸、後手彎肘往後上舉、前腳往左下踩、後腳往右後蹬。立在一根白色支柱上
 const tobidashi = (x, y, rot = 0) => { const limb = (d, c, w = 6) => `<path d="${d}" fill="none" stroke="var(--ink)" stroke-width="${w + 2.6}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  const sleeve = (x1, y1, x2, y2) => `<path d="M${x1},${y1} L${x2},${y2}" stroke="var(--ink)" stroke-width="8.6" stroke-linecap="round"/><path d="M${x1},${y1} L${x2},${y2}" stroke="#d23b33" stroke-width="6" stroke-linecap="round"/>`;
   return `<g transform="translate(${x} ${y}) rotate(${rot})">
-  <path d="M1,14 V36" stroke="var(--ink)" stroke-width="5.4" stroke-linecap="round"/><path d="M1,14 V36" stroke="#eef0f2" stroke-width="2.8" stroke-linecap="round"/>
-  ${limb('M3,1 L11,6 L19,11', '#f0a030')}<ellipse cx="21" cy="12.5" rx="5" ry="3.4" transform="rotate(20 21 12.5)" fill="#5a3322" stroke="var(--ink)" stroke-width="1.6"/>
-  ${limb('M-1,1 L-3,9 L-9,13', '#f0a030')}<ellipse cx="-11.5" cy="14" rx="5" ry="3.4" fill="#5a3322" stroke="var(--ink)" stroke-width="1.6"/>
-  ${limb('M5,-11 L10,-4 L17,-9', '#f2b8b8', 4.6)}
+  ${limb('M3,1 L11,6 L18,11', '#f0a030')}<ellipse cx="21" cy="10.5" rx="5.2" ry="3.4" transform="rotate(-40 21 10.5)" fill="#5a3322" stroke="var(--ink)" stroke-width="1.6"/>
+  ${limb('M-1,1 L-3,9 L-9,13', '#f0a030')}<ellipse cx="-11" cy="12" rx="5.2" ry="3.4" transform="rotate(40 -11 12)" fill="#5a3322" stroke="var(--ink)" stroke-width="1.6"/>
+  ${limb('M5,-11 L10,-4 L17,-9', '#f2b8b8', 4.6)}${sleeve(5, -11, 7.6, -7.4)}
   <path d="M-6,-14 C-2,-16 4,-16 7,-13 L5,3 C1,4 -3,4 -5,2 Z" fill="#d23b33" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/>
-  ${limb('M-4,-11 L-17,-10', '#f2b8b8', 4.6)}
+  ${limb('M-4,-11 L-15,-10 L-9,-2', '#f2b8b8', 4.6)}${sleeve(-4, -11, -9, -10.6)}
   <circle cx="0" cy="-25" r="10" fill="#f6c3c0" stroke="var(--ink)" stroke-width="2"/>
   <path d="M-10,-26 C-11,-34 -5,-38 1,-38 C7,-38 11,-34 10,-27 C7,-30 3,-31 0,-31 C-4,-31 -7,-30 -10,-26 Z" fill="#2b2626" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"/>
   <circle cx="-4" cy="-24" r="2.6" fill="var(--ink)"/><circle cx="4" cy="-24" r="2.6" fill="var(--ink)"/>
@@ -1517,20 +1518,21 @@ const harisen = (x, y, rot) => `<g transform="translate(${x} ${y}) rotate(${rot}
   <rect x="-5.5" y="-10" width="11" height="14" rx="2" fill="#e8509a" stroke="var(--ink)" stroke-width="2.2"/></g>`;
 // 串炸：竹籤上的炸物，旁邊是共用的醬汁盆（二度づけ禁止）
 // 串炸：左手握竹籤根部朝上舉著，兩塊串炸、頂端沾了深色醬汁（輕晃）；「二度づけ禁止」的共用醬汁盒放在腳邊
-const KUSHIKATSU = `<g transform="translate(22 182) scale(.8)"><rect x="-22" y="-2" width="44" height="16" rx="3" fill="#c0c6cc" stroke="var(--ink)" stroke-width="2.4"/><rect x="-18" y="1" width="36" height="6" rx="2" fill="#4a2a1a"/></g>
-  <g class="sway"><g transform="translate(30 140) rotate(-12)"><path d="M0,0 V-58" stroke="var(--ink)" stroke-width="3.6" stroke-linecap="round"/><path d="M0,0 V-58" stroke="#e2c897" stroke-width="1.6" stroke-linecap="round"/>
+const KUSHIKATSU = `<g class="sway"><g transform="translate(30 140) rotate(-12)"><path d="M0,0 V-58" stroke="var(--ink)" stroke-width="3.6" stroke-linecap="round"/><path d="M0,0 V-58" stroke="#e2c897" stroke-width="1.6" stroke-linecap="round"/>
   ${[-26, -46].map(y => `<rect x="-7" y="${y - 10}" width="14" height="20" rx="6" fill="#d9993e" stroke="var(--ink)" stroke-width="2.2"/><g fill="#f2c47a"><circle cx="-2.5" cy="${y - 4}" r="1.3"/><circle cx="2.5" cy="${y + 1}" r="1.3"/><circle cx="-2" cy="${y + 5}" r="1.3"/></g>`).join('')}
   <path d="M-7,-48 C-7,-55 -4,-56 0,-56 C4,-56 7,-55 7,-48 C5,-46 4,-43 3,-45 C2,-47 1,-45 0,-43 C-1,-45 -3,-47 -4,-44 C-5,-46 -6,-47 -7,-48 Z" fill="#4a2a1a" stroke="var(--ink)" stroke-width="1.6" stroke-linejoin="round"/></g></g>
   <ellipse cx="36" cy="132" rx="9" ry="14" transform="rotate(30 36 132)" fill="#e8509a" stroke="var(--ink)" stroke-width="3.5"/>`;
+// 二度づけ禁止的共用醬汁盆：右手端著
+const SAUCE_PAN = `<g transform="translate(172 146)"><rect x="-20" y="-4" width="40" height="15" rx="3" fill="#c0c6cc" stroke="var(--ink)" stroke-width="2.4"/><rect x="-16" y="-1" width="32" height="6" rx="2" fill="#4a2a1a"/><path d="M-12,-1 h8" stroke="#6a4030" stroke-width="1.4" stroke-linecap="round"/></g>`;
 CHARS.push({
   id: 'osaka', name: '大阪君', kind: '都道府縣・大阪府', tagColor: '#e8509a', motto: '「なんでやねん！」',
   colors: [['豹紋黃', '#F2B83D'], ['道頓堀粉', '#E8509A']],
   look: f => slime({ shape: 'egg', grad: [[0, '#fffbef'], [.55, '#fde9b8'], [1, '#f2b83d']], limb: '#e8509a', face: f.face || 'flip', armUp: f.armUp,
-    head: takoyaki(f.still), front: f.armUp ? harisen(166, 116, 18) : harisen(160, 156, 14), extra: f.extra }),
+    head: takoyaki(f.still), front: f.sauce ? SAUCE_PAN : f.armUp ? harisen(166, 116, 18) : harisen(160, 156, 14), extra: f.extra }),
   faces: [
     { face: 'open', armUp: true, name: 'ツッコミ', k: '( ´▽`)ノ', q: '「なんでやねん！」' },
     { face: 'serious', name: 'いらち', k: '(｀・ω・´)', q: '縣民自己選的特質：急性子，電扶梯靠右站、走左邊' },
-    { face: 'smileW', name: '二度づけ禁止', k: '( ^ω^ )', q: '串炸的醬汁是共用的，只能沾一次', extra: KUSHIKATSU },
+    { face: 'smileW', sauce: true, name: '二度づけ禁止', k: '( ^ω^ )', q: '串炸的醬汁是共用的，只能沾一次', extra: KUSHIKATSU },
     { face: 'flat', still: true, name: '沉穩模式', k: '( ・_・)', q: '嚴肅主題專用，柴魚片不動' },
   ],
   acc: [['章魚燒', '大阪的家裡幾乎都有章魚燒機，章魚燒是自己在家做的東西。柴魚片會跟著動作晃。'], ['ハリセン', '吐槽用的紙扇。大阪人的對話裡一定有人裝傻、有人吐槽。']],
@@ -1682,8 +1684,9 @@ const milk = (x, y, rot = 0) => `<g transform="translate(${x} ${y}) rotate(${rot
 const SHIMANE_SIGN = `<g transform="translate(32 150)"><path d="M0,30 V-6" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/><path d="M0,30 V-6" stroke="#c9a46a" stroke-width="2.4" stroke-linecap="round"/>
   <path d="M-16,-18 H18 V-4 H-16 L-22,-11 Z" fill="#fbf8f0" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/><text x="0" y="-7" font-size="10" text-anchor="middle" fill="var(--ink)" font-weight="700">島根</text></g>`;
 // 砂丘和駱駝：觀光客的印象
-const SAKYU = `<g transform="translate(20 174) scale(1.4)"><path d="M-26,10 C-16,-4 8,-8 26,10 Z" fill="#e6c98a" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/><path d="M-14,4 q4,-3 8,0 M2,2 q4,-3 8,0" fill="none" stroke="#c9a462" stroke-width="1.4" stroke-linecap="round"/>
-  <g transform="translate(2 -10)"><path d="M-8,6 V12 M-4,6 V12 M5,6 V12 M8,6 V12" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/><path d="M-10,6 C-11,0 -8,-2 -6,-4 C-4,-7 -1,-6 0,-3 C1,-6 4,-7 6,-4 C8,-2 9,1 10,0 L12,-6 L15,-6 L14,2 C12,6 8,7 0,7 C-6,7 -9,7 -10,6 Z" fill="#c9965a" stroke="var(--ink)" stroke-width="1.8" stroke-linejoin="round"/></g></g>`;
+const SAKYU = `<g><path d="M-6,212 V112 C14,100 40,100 62,112 C90,126 120,118 146,106 C168,96 188,98 206,104 V212 Z" fill="#ecd39a" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M-4,132 C20,124 44,126 64,136 M150,124 C170,114 188,116 204,120 M4,156 q8,-4 16,0 t16,0 M160,146 q8,-4 16,0 t16,0" fill="none" stroke="#c9a462" stroke-width="1.8" stroke-linecap="round"/>
+  <g transform="translate(26 106) scale(-1.45 1.45)"><g transform="translate(2 -10)"><path d="M-8,6 V12 M-4,6 V12 M5,6 V12 M8,6 V12" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/><path d="M-10,6 C-11,0 -8,-2 -6,-4 C-4,-7 -1,-6 0,-3 C1,-6 4,-7 6,-4 C8,-2 9,1 10,0 L12,-6 L15,-6 L14,2 C12,6 8,7 0,7 C-6,7 -9,7 -10,6 Z" fill="#c9965a" stroke="var(--ink)" stroke-width="1.8" stroke-linejoin="round"/></g></g></g>`;
 CHARS.push({
   id: 'tottori', name: '鳥取君', kind: '都道府縣・鳥取縣', tagColor: '#c9a24a', motto: '「我們才不是只有砂丘！」',
   colors: [['砂丘金', '#E6C98A'], ['二十世紀梨綠', '#B8C85A']],
@@ -1803,15 +1806,14 @@ const okonomi = (x, y, rot = 0) => `<g transform="translate(${x} ${y}) rotate(${
   <g fill="#8cc04a"><circle cx="-8" cy="-6" r="1.4"/><circle cx="-2" cy="-9" r="1.4"/><circle cx="6" cy="-8" r="1.4"/><circle cx="10" cy="-5" r="1.4"/><circle cx="-4" cy="-4" r="1.2"/><circle cx="4" cy="-4" r="1.2"/></g>
   <path d="M0,-7 l3,-2 M1,-5 l3,-1.6 M-1,-8.6 l2.6,-1.4" stroke="#e8604a" stroke-width="1.6" stroke-linecap="round"/></g>`;
 // 牡蠣
-const KAKI_SHELL = `<g transform="translate(37 160) rotate(-18)">
-  <path d="M-27,4 C-30,-8 -20,-22 -5,-25 C9,-27 24,-20 27,-7 C31,6 24,19 9,24 C-5,28 -24,21 -27,4 Z" fill="#8f897e" stroke="var(--ink)" stroke-width="2.6" stroke-linejoin="round"/>
-  <path d="M-24,3 C-26,-7 -18,-19 -5,-21 M8,-23 C20,-18 25,-10 25,-3 M22,10 C17,18 8,21 -2,22" fill="none" stroke="#6c665c" stroke-width="1.6" stroke-linecap="round"/>
-  <path d="M-21,2 C-22,-8 -13,-17 -2,-18 C10,-19 20,-12 21,-3 C22,7 15,15 4,17 C-8,19 -20,13 -21,2 Z" fill="#efece4" stroke="#b9b2a4" stroke-width="1.4"/>
-  <path d="M-15,1 C-16,-8 -8,-13 1,-13 C10,-13 16,-7 15,1 C15,8 8,12 0,12 C-9,12 -15,8 -15,1 Z" fill="#e6dcc4"/>
-  <path d="M-15,1 q2,-3 0,-5 q3,-2 2,-5 q3,0 4,-3 q3,1 5,-1 q2,2 5,1 q1,3 4,3 q0,3 3,4 q-1,3 1,5 q-2,2 -1,5 q-3,1 -3,4 q-3,0 -5,2 q-2,-1 -5,0 q-2,-2 -5,-2 q-1,-3 -4,-3 q0,-3 -2,-5 Z" fill="none" stroke="#5f5d58" stroke-width="2" stroke-linejoin="round"/>
-  <ellipse cx="-3" cy="-4" rx="5" ry="3" fill="#fff" opacity=".7"/></g>`;
+const KAKI_SHELL = `<g transform="translate(32 154) rotate(-35)">
+  <path d="M0,-23 C6,-24 12,-20 14,-13 C16,-6 14,2 11,9 C8,16 5,21 1,23 C-3,24 -6,21 -8,16 C-12,8 -15,-1 -14,-9 C-13,-17 -7,-22 0,-23 Z" fill="#8a8a78" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M-12,-10 q-2,4 0,7 M13,-6 q2,4 0,7 M9,12 q1,4 -2,6" fill="none" stroke="#5f5f50" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M0,-19 C5,-19 10,-15 11,-9 C12,-3 10,4 7,10 C5,14 3,17 0,18 C-3,18 -5,15 -6,11 C-9,4 -11,-3 -10,-9 C-9,-15 -5,-19 0,-19 Z" fill="#f3f0e8"/>
+  <path d="M0,-15 C5,-15 8,-11 8,-5 C8,2 5,8 1,11 C-2,11 -5,7 -6,1 C-7,-6 -5,-15 0,-15 Z" fill="#e6dcc2" stroke="#6b675d" stroke-width="1.8" stroke-linejoin="round" stroke-dasharray="2.4 1"/>
+  <path d="M-2,-10 C0,-12 3,-11 4,-8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></g>`;
 // 冷めやすい：正在融化的小冰塊
-const ICE_CUBE = `<g transform="translate(176 76) rotate(10)"><path d="M-9,-8 L3,-12 L11,-6 L11,6 L-1,10 L-9,4 Z" fill="#d6effa" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
+const ICE_CUBE = `<g transform="translate(180 74) rotate(10) scale(1.2)"><path d="M-9,-8 L3,-12 L11,-6 L11,6 L-1,10 L-9,4 Z" fill="#d6effa" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
   <path d="M-9,-8 L-1,-3 L11,-6 M-1,-3 V10" fill="none" stroke="#8cc4e0" stroke-width="1.6"/><path d="M-6,-5 l4,2" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
   <path d="M2,12 C1,15 3,17 4,17 C5,17 7,15 6,12 C5,10 3,10 2,12 Z" fill="#9fd3ef" stroke="var(--ink)" stroke-width="1.4"/></g>`;
 CHARS.push({
@@ -1821,7 +1823,7 @@ CHARS.push({
     head: ITSUKUSHIMA, front: f.armUp ? okonomi(174, 96, 10) : okonomi(166, 146, 4), extra: bodyBand('egg', 80, 30, 13, '#2e8bc0') + (f.extra || '') }),
   faces: [
     { face: 'serious', armUp: true, name: '不准叫廣島風', k: '(｀・ω・´)', q: '「叫它『廣島風』會生氣，這就是御好燒！」' },
-    { face: 'excited', extra: `<g transform="translate(26 70) scale(1.5) translate(-30 -56)">${FLAME()}</g>` + ICE_CUBE, name: '熱しやすい', k: '(≧▽≦)', q: '縣民自己選的特質：熱しやすく冷めやすい，球隊奪冠全縣暴動' },
+    { face: 'excited', extra: `<g transform="translate(22 70) scale(1.4) translate(-30 -56)">${FLAME()}</g>` + '<path d="M46,84 V54 M38,62 L46,52 L54,62" fill="none" stroke="#d23b33" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>' + ICE_CUBE + '<path d="M156,58 V88 M148,80 L156,90 L164,80" fill="none" stroke="#2f7fc1" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>', name: '熱しやすい', k: '(≧▽≦)', q: '縣民自己選的特質：熱しやすく冷めやすい，球隊奪冠全縣暴動' },
     { face: 'sweat', extra: bubble('じゃけぇ'), name: '沒有在吵架', k: '(・ω・;)', q: '朋友間正常講話，外縣市的人以為在吵架' },
     { face: 'smileW', name: '牡蠣', k: '( ^ω^ )', q: '牡蠣產量全國第一', extra: KAKI_SHELL },
     { face: 'flat', name: '沉穩模式', k: '( ・_・)', q: '嚴肅主題專用（8 月 6 日固定進入）' },
@@ -1864,14 +1866,23 @@ function fugu(mood = 'calm') {
 // 瓦片蕎麥：燒燙的瓦片上鋪茶蕎麥、蛋絲、牛肉、檸檬片
 // 瓦片蕎麥：深灰的瓦片（一側捲起的邊是辨識點）上鋪綠色茶蕎麥、黃色蛋絲、海苔、檸檬片和紅葉泥
 const kawara = (x, y, rot = 0) => { const top = 'M-26,0 C-20,-9 -12,-10 -6,-4 C0,2 7,6 14,3 C20,0 24,-6 26,-8';
-  return `<g transform="translate(${x} ${y}) rotate(${rot}) scale(1.3)">
+  const soba = 'M-13,-9 C-9,-11 -5,-8 -1,-3 C3,1 8,3 13,1';
+  return `<g transform="translate(${x} ${y}) rotate(${rot}) scale(1.05)">
   <path d="${top} L26,-3 C24,-1 20,5 14,8 C7,11 0,7 -6,1 C-12,-5 -20,-4 -26,5 Z" fill="#4a4d52" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/>
-  <path d="M-24,-3 C-19,-14 -11,-15 -5,-9 C1,-3 8,1 14,-2 C19,-5 23,-11 25,-12" fill="none" stroke="var(--ink)" stroke-width="7.4" stroke-linecap="round"/>
-  <path d="M-24,-3 C-19,-14 -11,-15 -5,-9 C1,-3 8,1 14,-2 C19,-5 23,-11 25,-12" fill="none" stroke="#6f8a34" stroke-width="5" stroke-linecap="round"/>
-  <path d="M-23,-2 C-18,-11 -11,-12 -5,-6 C1,0 8,4 14,1 C19,-2 23,-8 25,-9" fill="none" stroke="#8fa848" stroke-width="1.4" stroke-linecap="round"/>
-  <path d="M-19,-14 l6,1 M-13,-16 l5,2 M2,-5 l6,1 M17,-9 l5,-2" stroke="#f2d55a" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M-9,-14 q3,-3 6,0 q-3,2 -6,0 Z M9,-7 q3,-3 6,0 q-3,2 -6,0 Z" fill="#8a4a2e" stroke="var(--ink)" stroke-width="1.2"/>
-  <circle cx="-14" cy="-19" r="4.6" fill="#f7e46a" stroke="var(--ink)" stroke-width="1.6"/><circle cx="-14" cy="-19" r="1.7" fill="#e8673a"/></g>`; };
+  <path d="${soba}" fill="none" stroke="var(--ink)" stroke-width="9" stroke-linecap="round"/><path d="${soba}" fill="none" stroke="#6f8a34" stroke-width="6.4" stroke-linecap="round"/>
+  <path d="M-12,-10 C-8,-12 -5,-9 -1,-5 C3,-1 8,1 12,-1" fill="none" stroke="#8fa848" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M-10,-14 l5,1 M-4,-11 l5,2 M6,-4 l5,0" stroke="#f2d55a" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M1,-9 q3,-3 6,0 q-3,2 -6,0 Z" fill="#8a4a2e" stroke="var(--ink)" stroke-width="1.2"/>
+  <circle cx="-6" cy="-15" r="4" fill="#f7e46a" stroke="var(--ink)" stroke-width="1.6"/><circle cx="-6" cy="-15" r="1.5" fill="#e8673a"/></g>`; };
+// 總理大臣：穿西裝打領帶的政治人物半身像（不畫特定人物），下面寫「×8」（山口出身的總理大臣人數最多）
+const SOURI = `<g transform="translate(26 40)">
+  <path d="M-19,24 C-19,12 -12,7 0,7 C12,7 19,12 19,24 Z" fill="#2c3a5a" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M-6,7 L0,17 L6,7 Z" fill="#fbfbf8" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"/><path d="M0,10 L-2.4,13 L0,23 L2.4,13 Z" fill="#c8323a" stroke="var(--ink)" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M-12,9 L-6,16 M12,9 L6,16" stroke="#1c2840" stroke-width="1.6"/><circle cx="-12" cy="14" r="1.6" fill="#e1bf55"/>
+  <circle cy="-6" r="10" fill="#f3d2b4" stroke="var(--ink)" stroke-width="2"/>
+  <path d="M-10,-7 C-11,-15 -5,-18 1,-18 C7,-18 11,-14 10,-8 C6,-11 0,-13 -3,-11 C-6,-10 -8,-9 -10,-7 Z" fill="#3a3436" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"/>
+  <circle cx="-3.5" cy="-5" r="1.3" fill="var(--ink)"/><circle cx="3.5" cy="-5" r="1.3" fill="var(--ink)"/><path d="M-2.4,0 h4.8" stroke="var(--ink)" stroke-width="1.3" stroke-linecap="round"/>
+  <text y="44" font-family="Huninn, sans-serif" font-size="20" text-anchor="middle" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.6" stroke-linejoin="round">×8</text></g>`;
 CHARS.push({
   id: 'yamaguchi', name: '山口君', kind: '都道府縣・山口縣', tagColor: '#f2a72e', motto: '「……請稱呼『松陰先生』。」',
   colors: [['河豚灰', '#8F9AA6'], ['護欄夏蜜柑', '#F2A72E']],
@@ -1881,7 +1892,7 @@ CHARS.push({
     { face: 'calm', name: '保守的', k: '( ˘ω˘ )', q: '縣民自己選的特質：保守的' },
     { face: 'serious', fugu: 'puff', name: '松陰先生', k: '(｀・ω・´)', q: '直呼「吉田松陰」會被糾正，河豚跟著鼓起來' },
     { face: 'smileW', armUp: true, name: 'ふく', k: '( ^ω^ )', q: '河豚叫「ふく」（福），超市就買得到' },
-    { face: 'sweat', extra: medal('1') + `<g transform="translate(30 84)"><rect x="-22" y="-9" width="44" height="17" rx="3" fill="#fbf3dc" stroke="var(--ink)" stroke-width="2"/><text y="4" font-size="10.5" ${AUX_TXT}>首相 8 人</text></g>`, name: '總理大臣', k: '(・ω・;)', q: '總理大臣出最多，說起來有點驕傲又有點害羞' },
+    { face: 'sweat', extra: SOURI, name: '總理大臣', k: '(・ω・;)', q: '總理大臣出最多，說起來有點驕傲又有點害羞' },
     { face: 'flat', name: '沉穩模式', k: '( ・_・)', q: '嚴肅主題專用' },
   ],
   acc: [['河豚', '下關把河豚叫「ふく」，取「福」的諧音；超市就有賣河豚生魚片。被惹到時會整隻鼓起來。'], ['瓦片蕎麥', '燒燙的瓦片上鋪茶蕎麥、蛋絲、牛肉、海苔和檸檬片，瓦片一側捲起的邊是辨識點。家裡用鐵板也會做。'], ['護欄色的手腳', '山口縣的護欄是黃橘色的，據說是縣花夏蜜柑的顏色。']],
@@ -1918,6 +1929,16 @@ const KISHA = `<g><path d="M0,152 H200" stroke="#8a7a6a" stroke-width="3"/>
   ${[2, 24, 156, 178].map(x => `<rect x="${x}" y="105" width="18" height="13" rx="2" fill="#8fb4d6" stroke="var(--ink)" stroke-width="2"/>`).join('')}
   <rect x="152" y="86" width="7" height="12" rx="1.5" fill="#6b7480" stroke="var(--ink)" stroke-width="2"/><g fill="#5a5a5a" stroke="var(--ink)" stroke-width="1.6"><circle cx="157" cy="79" r="4.5"/><circle cx="163" cy="72" r="5.5"/><circle cx="171" cy="66" r="6.5"/></g>
   ${[18, 40, 160, 182].map(x => `<circle cx="${x}" cy="146" r="6" fill="#3a3a3a" stroke="var(--ink)" stroke-width="2"/>`).join('')}</g>`;
+// 「是汽車」：德島沒有電車。左邊是電車（車頂有集電弓）打紅叉，右邊是柴油車（車頂排氣管冒煙，日文叫「汽車」）畫綠圈
+const railcar = (x, y, roof) => `<g transform="translate(${x} ${y})">${roof}
+  <rect x="-21" y="-9" width="42" height="20" rx="5" fill="#e8eef4" stroke="var(--ink)" stroke-width="2.2"/><rect x="-21" y="4" width="42" height="3.6" fill="#2f7fc1"/>
+  ${[-16, -6, 4].map(dx => `<rect x="${dx}" y="-5" width="7" height="6" rx="1" fill="#8fb4d6" stroke="var(--ink)" stroke-width="1.4"/>`).join('')}<rect x="13" y="-5" width="5" height="12" rx="1" fill="#c9d4de" stroke="var(--ink)" stroke-width="1.4"/>
+  <circle cx="-12" cy="12.5" r="3" fill="#3a3a3a" stroke="var(--ink)" stroke-width="1.4"/><circle cx="12" cy="12.5" r="3" fill="#3a3a3a" stroke="var(--ink)" stroke-width="1.4"/>
+  <path d="M-25,16 H25" stroke="#8a7a6a" stroke-width="2"/></g>`;
+const DENSHA_NG = railcar(26, 100, '<path d="M-6,-9 L0,-17 L6,-9 M-7,-17 H7" fill="none" stroke="var(--ink)" stroke-width="1.8" stroke-linejoin="round"/>')
+  + '<path d="M10,82 L42,116 M42,82 L10,116" stroke="#d23b33" stroke-width="5" stroke-linecap="round"/>';
+const KISHA_OK = railcar(174, 100, '<rect x="5" y="-15" width="5" height="7" rx="1" fill="#6b7480" stroke="var(--ink)" stroke-width="1.6"/><g fill="#5a5a5a" stroke="var(--ink)" stroke-width="1.2"><circle cx="9" cy="-19" r="3"/><circle cx="13" cy="-24" r="3.6"/></g>')
+  + '<circle cx="174" cy="100" r="21" fill="none" stroke="#3aa04a" stroke-width="4.5"/>';
 CHARS.push({
   id: 'tokushima', name: '德島君', kind: '都道府縣・德島縣', tagColor: '#2c4f7c', motto: '「同じ阿呆なら踊らにゃ損々！」',
   colors: [['阿波藍', '#2C4F7C'], ['酸橘綠', '#6AA84F']],
@@ -1927,7 +1948,7 @@ CHARS.push({
     { face: 'calm', name: '商売人', k: '( ˘ω˘ )', q: '縣民自己選的特質：商売人，平常低調精明', extra: SOROBAN },
     { face: 'open', armUp: true, dance: true, name: '阿波舞', k: '(ﾉ´▽`)ﾉ', q: '音樂一響就切換成祭典模式，整個身體跟著搖' },
     { face: 'smileW', name: '淋酸橘', k: '( ^ω^ )', q: '「這樣才對味。」什麼都淋酸橘', extra: SUDACHI_RAIN },
-    { face: 'serious', kisha: true, name: '是汽車', k: '(｀・ω・´)', q: '「德島沒有電車，跑的是汽車（柴油車）！」' },
+    { face: 'serious', extra: DENSHA_NG + KISHA_OK, name: '是汽車', k: '(｀・ω・´)', q: '「德島沒有電車，跑的是汽車（柴油車）！」' },
     { face: 'flat', name: '沉穩模式', k: '( ・_・)', q: '嚴肅主題專用' },
   ],
   acc: [['阿波舞的編み笠', '女踊戴的半圓形斗笠，外緣一圈藍邊、兩端紅結。德島人說運動會也跳阿波舞，每年夏天「踊り狂う」。跳舞時整個身體跟著搖。'], ['酸橘', '德島產量全國第一的小柑橘，烤魚、味噌湯什麼都淋。和大分的臭橙比，酸橘小顆、通常切半用。']],
@@ -2173,17 +2194,20 @@ CHARS.push({
 // --- 熊本縣 ---
 // 熊本城：黑色下見板的牆、灰瓦屋頂，底下是往外彎的「武者返し」石牆
 const KUMAMOTO_JO = (() => { const K = 'stroke="var(--ink)" stroke-linejoin="round"';
-  const roof = (y, hw) => `<path d="M${100 - hw - 6},${y - 4} Q${100 - hw},${y + 1} ${100 - hw + 6},${y - 1} H${100 + hw - 6} Q${100 + hw},${y + 1} ${100 + hw + 6},${y - 4} L${100 + hw - 4},${y - 8} H${100 - hw + 4} Z" fill="#4a4f57" stroke-width="2" ${K}/><path d="M${100 - hw + 2},${y - 1.6} H${100 + hw - 2}" stroke="#f4f2ec" stroke-width="1.6"/>`;
-  const wall = (y0, y1, hw) => `<rect x="${100 - hw}" y="${y0}" width="${hw * 2}" height="${y1 - y0}" fill="#2b2626" stroke="var(--ink)" stroke-width="1.6"/><path d="M${100 - hw + 2},${y0 + 2.4} H${100 + hw - 2}" stroke="#d8d4ca" stroke-width="1.1" stroke-dasharray="3 2.4"/>`;
-  const gable = (x, y, w) => `<path d="M${x - w},${y} L${x},${y - w * .9} L${x + w},${y} Z" fill="#2b2626" stroke="#f4f2ec" stroke-width="1.4" stroke-linejoin="round"/>`;
-  return `<g transform="translate(100 0) scale(1.3 1.05) translate(-100 0)">
-  <path d="M62,60 C70,57 76,52 78,44 H122 C124,52 130,57 138,60 Z" fill="#a39d90" stroke-width="2.2" ${K}/>
-  <path d="M71,56 H129 M75,52 H125 M77,48 H123 M86,44 V48 M96,48 V52 M108,44 V48 M116,52 V56 M90,56 V60 M104,52 V56" fill="none" stroke="#7d776b" stroke-width="1"/>
-  ${wall(36, 44, 22)}${roof(38, 32)}${gable(88, 33, 6)}${gable(112, 33, 6)}
-  ${wall(26, 33, 16)}${roof(28, 24)}${gable(100, 23, 7)}
-  ${wall(17, 23, 11)}${roof(19, 17)}
-  ${wall(9, 14, 7)}${roof(10, 12)}
-  <path d="M88,4 l-1,-4 M112,4 l1,-4" stroke="#e1bf55" stroke-width="2.6" stroke-linecap="round"/></g>`; })();
+  const roof = (cx, y, hw) => `<path d="M${cx - hw - 5},${y - 3} Q${cx - hw + 1},${y + 2} ${cx - hw + 7},${y} H${cx + hw - 7} Q${cx + hw - 1},${y + 2} ${cx + hw + 5},${y - 3} L${cx + hw - 3},${y - 7} H${cx - hw + 3} Z" fill="#4a4f57" stroke-width="1.8" ${K}/><path d="M${cx - hw + 3},${y - .6} H${cx + hw - 3}" stroke="#f4f2ec" stroke-width="1.5"/>`;
+  const wall = (cx, y0, y1, hw) => `<rect x="${cx - hw}" y="${y0}" width="${hw * 2}" height="${y1 - y0}" fill="#2b2626" stroke="var(--ink)" stroke-width="1.4"/><path d="M${cx - hw + 3},${(y0 + y1) / 2} H${cx + hw - 3}" stroke="#e6e2d8" stroke-width="1.6" stroke-dasharray="2.4 2.6"/>`;
+  const chidori = (x, y, w) => `<path d="M${x - w},${y} L${x},${y - w} L${x + w},${y} Z" fill="#4a4f57" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"/><path d="M${x - w + 2},${y - .8} L${x},${y - w + 2} L${x + w - 2},${y - .8}" fill="none" stroke="#f4f2ec" stroke-width="1.1"/>`;
+  const kara = (x, y, w) => `<path d="M${x - w},${y} C${x - w / 2},${y} ${x - w / 3},${y - 6} ${x},${y - 6} C${x + w / 3},${y - 6} ${x + w / 2},${y} ${x + w},${y} Z" fill="#4a4f57" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"/>`;
+  return `<g>
+  <path d="M30,84 C42,80 50,74 54,64 H148 C152,74 160,80 172,84 Z" fill="#a39d90" stroke-width="2.2" ${K}/>
+  <path d="M42,80 H160 M48,76 H154 M52,72 H150 M54,68 H148 M64,64 V68 M84,68 V72 M104,64 V68 M124,68 V72 M140,64 V68 M72,72 V76 M96,76 V80 M118,72 V76 M136,76 V80 M58,80 V84 M146,80 V84" fill="none" stroke="#7d776b" stroke-width="1"/>
+  ${wall(146, 52, 64, 16)}${roof(146, 53, 22)}${wall(146, 42, 50, 11)}${roof(146, 43, 16)}${chidori(146, 39, 6)}
+  ${wall(92, 54, 64, 32)}${roof(92, 55, 42)}${chidori(70, 50, 7)}${chidori(114, 50, 7)}
+  ${wall(92, 44, 52, 25)}${roof(92, 45, 33)}${kara(92, 41, 11)}
+  ${wall(92, 34, 42, 19)}${roof(92, 35, 26)}${chidori(78, 31, 5)}${chidori(106, 31, 5)}
+  ${wall(92, 24, 32, 14)}${roof(92, 25, 20)}
+  ${wall(92, 15, 22, 9)}${roof(92, 15, 15)}
+  <path d="M79,9 l-2,-5 M105,9 l2,-5" stroke="#e1bf55" stroke-width="2.8" stroke-linecap="round"/></g>`; })();
 // 辛子蓮根：蓮藕切片，洞裡塞滿黃色芥末味噌，外層炸得金黃
 const renkon = (x, y, rot = 0) => `<g transform="translate(${x} ${y}) rotate(${rot})">
   <path d="M2,-13 H-16 C-22,-13 -24,-6 -24,0 C-24,6 -22,13 -16,13 H2 Z" fill="#e3ad3a" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/>
@@ -2306,11 +2330,10 @@ function sakurajima(mood = 'calm') {
 // 白熊：天文館的刨冰。玻璃碗裡堆成圓頂的刨冰淋上煉乳，用葡萄乾擺出熊的眼睛和鼻子（鼻子是深色的，不是紅的），周圍擺橘子片、鳳梨、櫻桃和綠色的哈密瓜
 const shirokuma = (x, y, rot = 0) => `<g transform="translate(${x} ${y}) rotate(${rot}) scale(1.1)">
   <path d="M-15,3 H15 L11,14 H-11 Z" fill="#dff0fa" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/><path d="M-11,7 H11" stroke="#fff" stroke-width="1.6"/>
-  <path d="M-17,4 C-17,-15 17,-15 17,4 Z" fill="#fbfbf6" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/>
-  <path d="M-14,-4 C-10,-2 -6,-4 -3,-2 M4,-3 C8,-1 12,-4 15,-2" fill="none" stroke="#efe6c8" stroke-width="1.6" stroke-linecap="round"/>
-  <path d="M-15,1 A3.4,3.4 0 0 1 -9,2 Z" fill="#f4a53a" stroke="var(--ink)" stroke-width="1"/><path d="M9,2 A3.4,3.4 0 0 1 15,1 Z" fill="#f4a53a" stroke="var(--ink)" stroke-width="1"/>
-  <circle cx="-9" cy="-9" r="2.4" fill="#d8242a" stroke="var(--ink)" stroke-width="1"/><rect x="7" y="-11" width="5" height="4" rx="1" fill="#f6d86a" stroke="var(--ink)" stroke-width="1"/><circle cx="0" cy="-12.5" r="2.2" fill="#8ccf6a" stroke="var(--ink)" stroke-width="1"/>
-  <ellipse cx="-4.6" cy="-5" rx="1.6" ry="1.9" fill="#4a2a22"/><ellipse cx="4.6" cy="-5" rx="1.6" ry="1.9" fill="#4a2a22"/><ellipse cx="0" cy="-1" rx="2.4" ry="1.8" fill="#4a2a22"/></g>`;
+  <circle cx="-10.5" cy="-14" r="4.6" fill="#8a5a3a" stroke="var(--ink)" stroke-width="1.8"/><circle cx="10.5" cy="-14" r="4.6" fill="#8a5a3a" stroke="var(--ink)" stroke-width="1.8"/>
+  <path d="M-15,4 C-17,-6 -10,-15 0,-15 C10,-15 17,-6 15,4 Z" fill="#fbfbf6" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
+  <circle cx="-5.5" cy="-6" r="1.8" fill="#6a4028"/><circle cx="5.5" cy="-6" r="1.8" fill="#6a4028"/>
+  <ellipse cx="0" cy="-0.5" rx="6" ry="4.4" fill="#fbfbf6" stroke="var(--ink)" stroke-width="1.4"/><ellipse cx="0" cy="-2" rx="2.4" ry="1.7" fill="#6a4028"/><path d="M0,0 V2" stroke="#6a4028" stroke-width="1.2"/></g>`;
 const kokuhai = (x, y, rot = 0) => `<g transform="translate(${x} ${y}) rotate(${rot})">
   <path d="M-12,-10 L12,-10 L13,14 C13,16 11,17 9,17 H-9 C-11,17 -13,16 -13,14 Z" fill="#f2c33a" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/>
   <path d="M-12,-10 C-8,-14 -4,-12 -3,-16 C-1,-20 1,-20 3,-16 C4,-12 8,-14 12,-10" fill="#f2c33a" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
