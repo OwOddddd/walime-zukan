@@ -1930,15 +1930,15 @@ const KISHA = `<g><path d="M0,152 H200" stroke="#8a7a6a" stroke-width="3"/>
   <rect x="152" y="86" width="7" height="12" rx="1.5" fill="#6b7480" stroke="var(--ink)" stroke-width="2"/><g fill="#5a5a5a" stroke="var(--ink)" stroke-width="1.6"><circle cx="157" cy="79" r="4.5"/><circle cx="163" cy="72" r="5.5"/><circle cx="171" cy="66" r="6.5"/></g>
   ${[18, 40, 160, 182].map(x => `<circle cx="${x}" cy="146" r="6" fill="#3a3a3a" stroke="var(--ink)" stroke-width="2"/>`).join('')}</g>`;
 // 「是汽車」：德島沒有電車。左邊是電車（車頂有集電弓）打紅叉，右邊是柴油車（車頂排氣管冒煙，日文叫「汽車」）畫綠圈
-const railcar = (x, y, roof) => `<g transform="translate(${x} ${y})">${roof}
-  <rect x="-21" y="-9" width="42" height="20" rx="5" fill="#e8eef4" stroke="var(--ink)" stroke-width="2.2"/><rect x="-21" y="4" width="42" height="3.6" fill="#2f7fc1"/>
+const railcar = (x, y, roof, body, band) => `<g transform="translate(${x} ${y})">${roof}
+  <rect x="-21" y="-9" width="42" height="20" rx="5" fill="${body}" stroke="var(--ink)" stroke-width="2.2"/><rect x="-21" y="4" width="42" height="3.6" fill="${band}"/>
   ${[-16, -6, 4].map(dx => `<rect x="${dx}" y="-5" width="7" height="6" rx="1" fill="#8fb4d6" stroke="var(--ink)" stroke-width="1.4"/>`).join('')}<rect x="13" y="-5" width="5" height="12" rx="1" fill="#c9d4de" stroke="var(--ink)" stroke-width="1.4"/>
   <circle cx="-12" cy="12.5" r="3" fill="#3a3a3a" stroke="var(--ink)" stroke-width="1.4"/><circle cx="12" cy="12.5" r="3" fill="#3a3a3a" stroke="var(--ink)" stroke-width="1.4"/>
   <path d="M-25,16 H25" stroke="#8a7a6a" stroke-width="2"/></g>`;
-const DENSHA_NG = railcar(26, 100, '<path d="M-6,-9 L0,-17 L6,-9 M-7,-17 H7" fill="none" stroke="var(--ink)" stroke-width="1.8" stroke-linejoin="round"/>')
-  + '<path d="M10,82 L42,116 M42,82 L10,116" stroke="#d23b33" stroke-width="5" stroke-linecap="round"/>';
-const KISHA_OK = railcar(174, 100, '<rect x="5" y="-15" width="5" height="7" rx="1" fill="#6b7480" stroke="var(--ink)" stroke-width="1.6"/><g fill="#5a5a5a" stroke="var(--ink)" stroke-width="1.2"><circle cx="9" cy="-19" r="3"/><circle cx="13" cy="-24" r="3.6"/></g>')
-  + '<circle cx="174" cy="100" r="21" fill="none" stroke="#3aa04a" stroke-width="4.5"/>';
+const DENSHA_NG = railcar(26, 104, '<path d="M-6,-9 L0,-17 L6,-9 M-7,-17 H7" fill="none" stroke="var(--ink)" stroke-width="1.8" stroke-linejoin="round"/>', '#dfe6ec', '#2f6fb5')
+  + '<path d="M18,62 L34,78 M34,62 L18,78" stroke="#d23b33" stroke-width="5" stroke-linecap="round"/>';
+const KISHA_OK = railcar(174, 104, '<rect x="5" y="-15" width="5" height="7" rx="1" fill="#6b7480" stroke="var(--ink)" stroke-width="1.6"/><g fill="#5a5a5a" stroke="var(--ink)" stroke-width="1.2"><circle cx="9" cy="-19" r="3"/><circle cx="13" cy="-24" r="3.6"/></g>', '#f3e6c4', '#c8463a')
+  + '<circle cx="168" cy="70" r="9" fill="none" stroke="#3aa04a" stroke-width="4.5"/>';
 CHARS.push({
   id: 'tokushima', name: '德島君', kind: '都道府縣・德島縣', tagColor: '#2c4f7c', motto: '「同じ阿呆なら踊らにゃ損々！」',
   colors: [['阿波藍', '#2C4F7C'], ['酸橘綠', '#6AA84F']],
@@ -2021,7 +2021,7 @@ CHARS.push({
   id: 'ehime', name: '愛媛君', kind: '都道府縣・愛媛縣', tagColor: '#f28a1e', motto: '「水龍頭會流出蜜柑汁？……機場那個啦。」',
   colors: [['蜜柑橙', '#F28A1E'], ['瀨戶內藍', '#2F6EA3']],
   look: f => slime({ shape: 'egg', grad: [[0, '#fffbf4'], [.55, '#fdebd2'], [1, '#f6c48a']], limb: '#2f6ea3', face: f.face || 'hinata', armUp: f.armUp,
-    head: MIKAN_TAP, front: f.armUp ? `<g class="sway">${botchan(178, 90, 6)}</g>` : botchan(170, 132, 6) + '<ellipse cx="164" cy="132" rx="9" ry="14" transform="rotate(-30 164 132)" fill="#2f6ea3" stroke="var(--ink)" stroke-width="3.5"/>', extra: f.extra }),
+    head: MIKAN_TAP, front: f.armUp ? `<g class="sway">${botchan(178, 90, 6)}</g>` : '<ellipse cx="164" cy="132" rx="9" ry="14" transform="rotate(-30 164 132)" fill="#2f6ea3" stroke="var(--ink)" stroke-width="3.5"/>' + botchan(170, 132, 6), extra: f.extra }),
   faces: [
     { face: 'calm', name: '穏やか', k: '( ˘ω˘ )', q: '縣民自己選的特質：穏やか' },
     { face: 'sweat', extra: BLUE_DROP + bubble('ただの水', 36, 52, 9.5), name: '水龍頭', k: '(・ω・;)', q: '「家裡的水龍頭不會流出蜜柑汁啦。」' },
@@ -2216,11 +2216,18 @@ const renkon = (x, y, rot = 0) => `<g transform="translate(${x} ${y}) rotate(${r
   <g fill="#f0c020" stroke="#a87e12" stroke-width="1">${Array.from({ length: 6 }, (_, i) => { const a = (i * 60 - 90) * Math.PI / 180; return `<ellipse cx="${(2 + 4.6 * Math.cos(a)).toFixed(1)}" cy="${(6.4 * Math.sin(a)).toFixed(1)}" rx="2.2" ry="2.6"/>`; }).join('')}<ellipse cx="2" rx="1.8" ry="2.2"/></g></g>`;
 // 絆創膏（熊本叫「リバテープ」）
 const BANDAGE = '<g transform="rotate(-25 62 142)"><rect x="50" y="137" width="26" height="10" rx="5" fill="#e8c8a0" stroke="var(--ink)" stroke-width="1.8"/><rect x="58" y="138.5" width="10" height="7" fill="#f4e4cc"/><g fill="#c9a47a"><circle cx="54" cy="140" r=".7"/><circle cx="54" cy="144" r=".7"/><circle cx="72" cy="140" r=".7"/><circle cx="72" cy="144" r=".7"/></g></g>';
+// 半顆西瓜帽（公開版熊本君的頭飾）：熊本的西瓜產量全國第一
+const SUICA_HAT = (() => { const id = 'sc' + (uid++), D = 'M60,58 C58,26 78,10 100,10 C122,10 142,26 140,58 C126,52 74,52 60,58 Z';
+  return `<g><defs><clipPath id="${id}"><path d="${D}"/></clipPath></defs><path d="${D}" fill="#3f8f3a"/>
+  <g clip-path="url(#${id})" fill="none" stroke="#1f5a24" stroke-width="4" stroke-linejoin="round">${[70, 86, 100, 114, 130].map(x => `<path d="M${x},6 l-3,7 l3,7 l-3,7 l3,7 l-3,7 l3,7 l-3,7"/>`).join('')}</g>
+  <path d="M60,58 C74,52 126,52 140,58 L139,54 C125,48 75,48 61,54 Z" fill="#eef5d8"/><path d="M62,52.6 C76,47 124,47 138,52.6" fill="none" stroke="#e04a4a" stroke-width="2.4"/>
+  <path d="${D}" fill="none" stroke="var(--ink)" stroke-width="2.8" stroke-linejoin="round"/>
+  <path d="M100,10 C99,5 102,2 106,3 C109,4 109,8 106,8" fill="none" stroke="var(--ink)" stroke-width="4.4" stroke-linecap="round"/><path d="M100,10 C99,5 102,2 106,3 C109,4 109,8 106,8" fill="none" stroke="#8a6a3a" stroke-width="2" stroke-linecap="round"/></g>`; })();
 CHARS.push({
   id: 'kumamoto', name: '熊本君', kind: '都道府縣・熊本縣', tagColor: '#2b2626', motto: '「なんば言いよっとか！」',
   colors: [['阿蘇草原綠', '#B8CC8A'], ['熊本城黑', '#2B2626']],
   look: f => slime({ shape: 'egg', grad: [[0, '#fbfdf6'], [.55, '#e8f0d8'], [1, '#b8cc8a']], limb: '#2b2626', face: f.face || 'grumpy', armUp: f.armUp,
-    head: KUMAMOTO_JO, front: f.armUp ? renkon(178, 92, -10) : renkon(170, 146, -8), deco: f.band ? BANDAGE : '', extra: f.extra }),
+    head: SUICA_HAT, front: f.armUp ? renkon(178, 92, -10) : renkon(170, 146, -8), deco: f.band ? BANDAGE : '', extra: f.extra }),
   faces: [
     { face: 'serious', name: '肥後もっこす', k: '(｀・ω・´)', q: '頑固，決定的事絕不讓步' },
     { face: 'open', armUp: true, name: 'わさもん', k: '( ´▽`)ノ', q: '縣民自己選的特質：わさもん（喜歡新東西）' },
@@ -2228,12 +2235,12 @@ CHARS.push({
     { face: 'calm', extra: WATER, name: '水是免費的', k: '( ˘ω˘ )', q: '「熊本市的自來水百分之百是地下水。」' },
     { face: 'flat', name: '沉穩模式', k: '( ・_・)', q: '嚴肅主題專用' },
   ],
-  acc: [['熊本城', '黑色下見板的牆、灰瓦屋頂，底下是往外彎的「武者返し」石牆。'], ['辛子蓮根', '蓮藕的洞裡塞滿芥末味噌再炸，切開是黃色的花紋。']],
+  acc: [['半顆西瓜', '熊本的西瓜產量全國第一，植木西瓜最有名。切成一半當帽子戴，頂上留著瓜蒂。'], ['辛子蓮根', '蓮藕的洞裡塞滿芥末味噌再炸，切開是黃色的花紋。']],
   persona: '頑固的熱血派。肥後もっこす，正義感強、不輕易妥協；外表剛硬，其實重人情、愛新東西。',
   diff: '和鹿兒島爭九州第二：鹿兒島沉默剛毅，熊本會跟你辯到底。和大分共有阿蘇九重國立公園。',
   points: ['（口頭禪）「なんば言いよっとか！」', '（怪癖）OK 繃叫「リバテープ」。', '（怪癖）「あとぜき」（隨手關門）以為是全國通用的話。', '（雷點）「不要以為熊本人每天吃馬肉。」'],
   power: '變形「阿蘇山」：變成巨大的破火山口。技能「武者返し」：變成往外彎的石牆，對手爬不上來。分裂採歷史殘響：西南戰爭的籠城、天草（海與教會）。',
-  why: '頭上是熊本城：黑色的下見板牆和往外彎的武者返し石牆是辨識點。阿蘇火山和鹿兒島的櫻島撞，放進配色和變形。手上拿辛子蓮根，切面的花紋很好認。リバテープ是縣民的あるある，做成需要時才貼在身上的 OK 繃。',
+  why: '頭上是半顆西瓜：熊本的西瓜產量全國第一，深綠的鋸齒條紋和瓜蒂一看就懂。阿蘇火山和鹿兒島的櫻島撞，放進配色和變形。手上拿辛子蓮根，切面的花紋很好認。リバテープ是縣民的あるある，做成需要時才貼在身上的 OK 繃。',
 });
 
 // --- 大分縣 ---
